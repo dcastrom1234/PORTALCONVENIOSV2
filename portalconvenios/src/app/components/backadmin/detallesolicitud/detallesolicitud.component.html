@@ -1,0 +1,30 @@
+<div class="container">
+    <h3>Detalle de solicitud</h3>
+
+    <div class="alert alert-primary" role="alert">
+        <p><b>Solicitud:</b> {{datos.name}}</p>
+        <p>Fecha Solicitud: {{datos.fcrea}} </p>
+    </div>
+    <div class="alert alert-secondary" role="alert">
+       <p> <b>Encargado Entidad:</b> {{datos.encargado}}</p>
+       <p><b>Cargo:</b> {{datos.cargo }} </p>
+       <p><b>Mail encargado:</b> {{datos.mail }} </p>
+       <p><b>Teléfono contacto:</b> {{datos.telefono }} </p>
+    </div>
+
+    <div class="alert alert-warning" role="alert">
+        <p><b>Aprobada:</b> {{ datos.aprobado }}</p>
+        <div class="panel-footer row" >
+            <div class="col-6 text-left" *ngIf="datos.aprobado=='NO'?true:false">
+                <p>
+                    <input type="button"  class="btn btn-primary" name="id{{datos.id}}" id="id{{datos.id}}"
+                    value="Aprobar"
+                    (click)="apruebaConvenios(datos.id)">
+                </p>
+            </div>
+            <div class="col-6 text-right">
+                <a class="btn btn-warning " (click)="goBack()">Volver menú</a>
+            </div>
+        </div>
+    </div>
+</div>

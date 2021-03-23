@@ -1,0 +1,30 @@
+<div class="container-fluid">
+    <h3>Listado de Servicios</h3>
+    <p>Estos son los servicios publicados y disponibles para uso</p>
+    <table class="table table-hover col-10-md">
+        <thead>
+            <tr>
+              <th scope="col">Id</th>
+              <th scope="col">Nombre servicio</th>
+              <th scope="col">Descripción</th>
+              <th scope="col">Estado</th>
+              <th scope="col">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let l of listado; let i = index">
+             
+              <td>{{l.id}}</td>
+              <td>{{l.nombre}}</td>
+              <td>{{l.desc}}</td>
+              <td>{{l.estado}}</td>
+              <td>
+                  <a class="btn btn-warning btn-sm" routerLink="/detaserv/{{l.id}}">Ver</a> &nbsp;
+                  <a class="btn btn-success btn-sm" routerLink="/editaserv//{{l.id}}">Editar</a>
+              </td>
+            </tr>
+          </tbody>
+    </table>
+    <a routerLink="/homeadmin" class="btn btn-primary">Volver</a>
+</div>
+

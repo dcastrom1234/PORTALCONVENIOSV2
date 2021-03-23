@@ -1,0 +1,13 @@
+<div class="container-fluid">
+    <h3>Matriz de Servicios</h3>
+    <p>En esta matriz se podrán activar y desactivar los servicios autorizados a cada Entidad.</p>
+    <div class="row col-12">
+    <table class="matriz" >
+      <tr>  
+        <th class="normal">Entidades/Servicios</th>
+        <th class="vheader">Activa todos</th>
+        <th *ngFor="let l of servicios; let i = index" class="vheader"> <p> {{ l.nombre }} </p> </th>
+      </tr>
+    </table>
+    <table class="matriz" #data></table>
+    </div>

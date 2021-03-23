@@ -1,0 +1,86 @@
+<div class="container">
+    <div class="col-md-8 mx-auto">
+        <div class="card">
+            <div class="card-header">
+                <b>Registro de nueva entidad</b>
+            </div>
+            <div class="card-body">
+                <form [formGroup]="reg" (ngSubmit)="registroEntidad()" *ngIf="!paso2">
+                <div class="form-group">
+                    <label for="tipo">Tipo entidad</label>
+                    <select formControlName="tipo" class="form-control">
+                        <option value="">Seleccione entidad</option>
+                        <option *ngFor="let i of tipoentidad" value="{{i.codigo}}">{{i.entidad}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="entnombre">Nombre entidad</label>
+                    <input type="text" class="form-control form-control-sm" formControlName="entnombre" placeholder="ej. juzgado policia local n°23">
+                </div>
+                <div class="form-group">
+                    <label for="entadireccion">Dirección</label>
+                    <input type="text" class="form-control form-control-sm" formControlName="entdireccion" placeholder="Direccion">
+                    <label for="entcomuna">Comuna</label>
+                    <select formControlName="entcomuna" class="form-control">
+                        <option value="{{ i.codigo }}" *ngFor="let i of comunas"> {{ i.comuna }} </option>
+                    </select>
+                </div>
+                <button type="submit" [disabled]="reg.invalid" class="btn btn-primary">Registrar Entidad</button>
+                </form>
+
+
+                <form [formGroup]="regusuarios" (ngSubmit)="registroUsuarios()" *ngIf="paso2">
+                    <div class="form-group">
+                        <label for="usrnombre">Nombre Autoridad</label>
+                        <input type="text" class="form-control" formControlName="usrnombre" placeholder="ej. Juan Perez">
+                    </div>
+                    <div class="form-group">
+                        <label for="autoridad">Descripción cargo Autoridad</label>
+                        <input type="text" class="form-control" formControlName="autoridad" placeholder="ej. Juez de Policia Local">
+                    </div>
+                    <div class="form-group">
+                        <label for="usrrun">RUN Autoridad</label>
+                        <input type="text" class="form-control" formControlName="usrrun" placeholder="ej. 12345678-9">
+                    </div>
+                    <div class="form-group">
+                        <label for="usremail">Email Autoridad</label>
+                        <input type="text" class="form-control" formControlName="usremail" placeholder="ej. yo@micasa.cl">
+                    </div>
+                    <div class="form-group">
+                        <label for="usrtelefono">Teléfono contacto Autoridad</label>
+                        <input type="text" class="form-control form-control-sm" formControlName="usrtelefono" placeholder="+56988778855">
+                    </div>
+                    <div class="form-group">
+                        <label>Genero </label><br>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" formControlName="usrgenero" value="M">
+                            <label class="form-check-label">Masculino</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" formControlName="usrgenero" value="F">
+                            <label class="form-check-label">Femenino</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="usrclave">Clave (mín 6 caracteres)</label>
+                        <div class="col-md-8">
+                            
+                            <label>Ingrese Contraseña</label>
+                            <div class="input-group">
+                          <input ID="usrclave" type="Password" formControlName="usrclave" Class="form-control">
+                            <div class="input-group-append">
+                                <button id="show_password" class="btn btn-primary" type="button" onclick="mostrarPassword()"> <span class="fa fa-eye-slash icon"></span> </button>
+                            </div>
+                          </div>
+                          <p class="info">Click en el ojo para mostrar / ocultar</p>
+                          </div>
+                    </div>
+                    <input type="hidden" formControlName="entidad" value="{{entid}}">
+                    <input type="hidden" formControlName="cargo">
+                    <button type="submit" [disabled]="regusuarios.invalid" class="btn btn-primary">Registrar Usuario</button>
+                </form>
+            </div>
+            
+        </div>
+    </div>
+</div>

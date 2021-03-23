@@ -1,0 +1,10 @@
+<div class="container-fluid">
+  <h3>Matriz de Servicios</h3>
+
+  
+  <table class="matriz">
+    <tr class="vheader" *ngFor="let l of servicios; let i = index">  
+      <td>Entidades/Servicios</td>
+      <td > <p> {{ l.nombre }} </p> </td>
+    </tr>
+  </table>

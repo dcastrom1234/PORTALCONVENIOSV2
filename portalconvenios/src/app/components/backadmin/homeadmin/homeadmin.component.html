@@ -1,0 +1,54 @@
+<div class="container-fluid p-2">
+    <h3>Administración de la plataforma</h3>
+    <p>Actividades de administración de la plataforma de convenios</p>
+    <div class="row">
+        <div class="col-md-4 mt-1">
+            <div class="card" >
+                <div class="card-header"><b>Nuevas solicitudes</b></div>
+                <div class="card-body" style="height: 11em;"><p>Listado de entidades solicitantes de acceso</p><br>
+                <div class="abajo"> <a routerLink="/listanuevasentidades" class="btn btn-primary" >Ver entidades</a></div>
+                </div>
+            </div>
+         </div>
+        <div class="col-md-4 mt-1">
+            <div class="card">
+                <div class="card-header"><b>Listado de Convenios</b></div>
+                <div class="card-body" style="height: 11em;"><p>Listado de convenios generados</p><br>
+                <div class="abajo"><a routerLink="/listaconvenios" class="btn btn-primary">Ver convenio</a></div> 
+                </div>
+            </div>
+        </div>    
+        <div class="col-md-4 mt-1">
+            <div class="card">
+                <div class="card-header"><b>Listado de Entidades</b></div>
+                <div class="card-body" style="height: 11em;"><p>Listado de Entidades Existentes</p><br>
+                <div class="abajo"><a routerLink="bklstaprobacion" class="btn btn-primary">Ver Entidades</a></div> 
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mt-1">
+            <div class="card">
+                <div class="card-header"><b>Cambio usuario Firma</b></div>
+                <div class="card-body" style="height: 11em;"><p>Selecciona al usuario activo para firmar (subrrogante)</p><br>
+                 <div class="abajo"> <a routerLink="/firmante" class="btn btn-primary">Ver Usuarios</a></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mt-1" *ngIf="esFirmante" >
+            <div class="card">
+                <div class="card-header"><b>Firma documentos</b></div>
+                <div class="card-body" style="height: 11em;"><p>Permite firmar los documentos (convenios) pendientes.</p><br>
+                 <div class="abajo"> <a routerLink="/multifirma" class="btn btn-primary">Ver Usuarios</a></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mt-1">
+            <div class="card">
+                <div class="card-header"><b>Preguntas Frecuentes</b></div>
+                <div class="card-body" style="height: 11em;"><p>Permite cargar nuevas preguntas frecuentes.</p><br>
+                 <div class="abajo"> <a routerLink="/preguntas" class="btn btn-primary">Ver preguntas</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>

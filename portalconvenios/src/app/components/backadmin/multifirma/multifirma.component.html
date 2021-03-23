@@ -1,0 +1,39 @@
+<div class="container-fluid">
+    <h3>Convenios pendientes de firma</h3>
+    <p>El siguiente listado muestra los convenios pendientes de firma, usando el checkbox de la izquierda puede serleccionar y firmar más de uno a la vez.</p>
+
+
+<form [formGroup]="convenios" (ngSubmit)="firmar()" novalidate>
+    <table class="table table-hover col-10-md">
+        <thead>
+            <tr>
+              <th scope="col">Elegir</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Entidad</th>
+              <th scope="col">fecha firma</th>
+              <th scope="col">Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let l of listado;let i=index" >
+                <td id="ck2_{{l.codigo}}">
+                    <input type="checkbox" [value]="l.codigo"  (change)="onCheckboxChange($event)" *ngIf="l.estado=='Pendiente'" >
+                    &nbsp;
+                    <a [routerLink]="['/visoradmin', l.identidad, l.convenio ]" class='btn btn-primary btn-sm'>Ver documento</a>
+                
+                
+                </td>
+                <td class="texto-pequeno"> {{ l.documento | urldecode}}</td>
+                <td>{{ l.entidad }}</td>
+                <td>{{ l.fecha }}</td>
+                <td id="estado_{{l.codigo}}">
+                    <p class='btn btn-warning btn-sm' *ngIf="l.estado=='Pendiente'">Pendiente</p>
+                    <p class='btn btn-success btn-sm' *ngIf="l.estado=='Firmado'">Firmado</p>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <button class="btn btn-success" type="submit" [disabled]="!checkArray">Firmar Documento(s) Seleccionado(s) </button>
+</form>
+        
+</div>

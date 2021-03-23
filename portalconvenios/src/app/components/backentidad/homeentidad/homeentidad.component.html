@@ -1,0 +1,43 @@
+<div class="container-fluid p-2">
+
+    <h3>Menú</h3>
+    <div class="row">
+        <div class="col-md-4 mt-1">
+            <div class="card" >
+                <div class="card-header"><b>Firma Convenios</b></div>
+                <div class="card-body" style="height: 8em;">Permite firmar un nuevo convenio usando Clave Única</div>
+                <div class="abajo"> <a routerLink="/firmaconvenio" class="btn btn-primary">Firmar Convenios</a></div>
+
+            </div>
+        </div>
+        <div class="col-md-4 mt-1">
+            <div class="card" >
+                <div class="card-header"><b>Agregar coordinador</b></div>
+                <div class="card-body" style="height: 8em;">Permite agregar un coordinador asociado a la entidad</div>
+                <div class="abajo"> <a routerLink="/coordinador" class="btn btn-primary">agregar coordinador</a></div>
+            </div>
+        </div>
+        <div class="col-md-4 mt-1">
+            <div class="card"  >
+                <div class="card-header"><b>Preguntas Frecuentes</b></div>
+                <div class="card-body" style="height: 8em;">Selección de preguntas frecuentes</div>
+                <div class="abajo"> <a routerLink="/preguntasfreq" class="btn btn-primary">Ver pregutnas</a></div>
+            </div>
+        </div>
+        <div class="col-md-4 mt-1">
+            <div class="card"  >
+                <div class="card-header"><b>Formularios</b></div>
+                <div class="card-body" style="height: 8em;">Formularios de solicitud</div>
+                <div class="abajo"> <a routerLink="/formularios" class="btn btn-primary">Ver formularios</a></div>
+            </div>
+        </div>
+        <div class="col-md-4 mt-1" *ngFor="let m of menuLista;">
+            <div class="card" >
+                <div class="card-header"><b>{{ m.menu}}</b></div>
+                <div class="card-body" style="height: 8em;">{{ m.texto }}</div>
+                <div class="abajo"> <a routerLink="/{{ m.url }}" class="btn btn-primary">Ver opciones</a></div>
+            </div>
+        </div>
+    </div>
+
+</div>

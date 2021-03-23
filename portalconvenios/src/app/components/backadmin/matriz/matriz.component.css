@@ -1,0 +1,35 @@
+.vheader {
+    text-align:center;
+    white-space:nowrap;
+    g-origin: 50% 50%;
+    -webkit-transform: rotate(315deg);
+    -moz-transform: rotate(315deg);
+    -ms-transform: rotate(315deg);
+    -o-transform: rotate(315deg);
+    transform: rotate(315deg);
+    
+}
+.vheader p {
+    margin:0 -80% ;
+    display:inline-block;
+}
+.vheader p:before{
+    content:'';
+    padding-top:110%;/* takes width as reference, + 10% for faking some extra padding */
+    display:inline-block;
+    vertical-align:middle;
+}
+
+table.matriz th {
+    border: 1px solid lightgray;
+}
+
+table.matriz {
+    text-align:center;
+    table-layout : fixed;
+    width: 100%;
+}
+
+.normal {
+    width:25%;
+}

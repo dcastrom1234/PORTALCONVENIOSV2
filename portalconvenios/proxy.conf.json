@@ -1,0 +1,8 @@
+{
+  "/api/rcconv/*": {
+    "target": "http://localhost:52773",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  }
+}

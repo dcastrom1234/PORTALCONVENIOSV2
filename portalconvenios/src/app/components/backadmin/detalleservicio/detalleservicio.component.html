@@ -1,0 +1,51 @@
+<div class="container">
+    <h3>Detalle de Servicio</h3>
+
+    <div class="alert alert-primary" role="alert">
+        <h4><b> {{ datos.nombre }} </b></h4>
+        version: {{ datos.version }}
+    </div>
+    <div class="alert alert-secondary" role="alert">
+        <p><b>Descripción del servicio</b></p>
+        <p>{{ datos.desc }}</p>
+    </div>
+    <div class="alert alert-warning" role="alert">
+        <p><b>Metodos:</b>  </p>
+        <h6> {{ datos.metodos }} </h6>
+    </div>
+    <div class="row justify-content-around" *ngIf="datos.jsonreq!=='' || datos.jsonres!==''">
+        <div class="col-6">
+            <div class="alert alert-info">
+                <b>REQUEST:</b> <br>
+                <pre>
+&#123; 
+ {{ datos.req }} 
+&#125;
+                </pre>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="alert alert-success">
+                <b>RESPONSE:</b> <br>
+                <pre>
+&#123; 
+ {{ datos.res }} 
+&#125;
+                </pre>
+            </div>
+        </div>
+    </div>
+    <div class="alert alert-success" *ngIf="datos.url!==''">
+        <b>URL:</b> <br>
+         <code>
+            
+        </code>
+    </div>
+    <div class="alert alert-success" *ngIf="datos.epoint!==''">
+        <b>EndPoint:</b> <br>
+        <p class="font-monospace">
+            {{ datos.epoint}}
+        </p>
+    </div>
+        <a routerLink="/listaservicios" class="btn btn-primary">Volver</a>
+</div>

@@ -1,0 +1,36 @@
+<div class="container-fluid">
+    <h3>Listado de Entidades</h3>
+    <p>Estas entidades aún no han sido autorizadas para la generación de un nuevo convenio.</p>
+    <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Nombre entidad</th>
+            <th scope="col">Comuna</th>
+            <th scope="col">Fecha Solicitud</th>
+            <th scope="col">Aprobar</th>
+            <th scope="col">Detalles</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let l of listado; let i = index">
+            <td>{{l.id}}</td>
+            <td>{{l.name}}</td>
+            <td>{{l.comuna}}</td>
+            <td>{{l.fcrea}}</td>
+            <td>
+                <input type="button"  class="btn btn-primary" name="onOff{{l.id}}" name="id{{l.id}}" id="id{{l.id}}"
+                [value]="!l.estado?'APROBADO':'NO APROBADO'"
+                (click)="apruebaConvenios(l.id)">
+            </td>
+            <td>
+                <a class="btn btn-warning " routerLink="/detasol/{{l.id}}">Ver</a>
+            </td>
+          </tr>
+        </tbody>
+    </table>
+    <ng-container *ngIf="listado.length>0?false:true">
+        <p><b>No hay solicitudes pendientes!</b></p>
+    </ng-container>
+    <a (click)="goBack()" class="btn btn-primary">Volver</a>
+</div>

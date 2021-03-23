@@ -1,0 +1,30 @@
+<div class="container-fluid">
+    <h3>Selección Usuario Firmante</h3>
+    <p>Del listado a continuación seleccione al usuario que podrá firmar los convenios, solo se muestran los usuarios con privilegio de administración del portal.</p>
+
+
+    <table class="table table-hover col-10-md">
+        <thead>
+            <tr>
+              <th scope="col">login</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Telefono contacto</th>
+              <th scope="col">Estado</th>
+              <th scope="col">Firmante</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let l of listado; let i = index">
+             
+              <td>{{l.login}}</td>
+              <td>{{l.nombre}}</td>
+              <td>{{l.telefono}}</td>
+              <td>{{ (l.estado=='A')?"Activo":"Inactivo" }}</td>
+              <td>
+                <button *ngIf="l.firmante=='S'" class="btn btn-success btn-sm" >Activo</button>
+                <button *ngIf="l.firmante=='N'" class="btn btn-danger btn-sm" (click)="activaFirmante(l.login)">Inactivo</button>
+              </td>
+            </tr>
+          </tbody>
+    </table>
+</div>

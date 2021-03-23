@@ -1,0 +1,2416 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25">
+<Class name="interop.base.Base">
+<Super>%Persistent</Super>
+
+<Property name="fupdate">
+<Type>%TimeStamp</Type>
+<InitialExpression>$zdt($NOW(),3,1,0)</InitialExpression>
+<SqlColumnNumber>30</SqlColumnNumber>
+<SqlFieldName>fupdate</SqlFieldName>
+</Property>
+
+<Property name="fcreate">
+<Type>%TimeStamp</Type>
+<InitialExpression>$zdt($NOW(),3,1,0)</InitialExpression>
+<SqlColumnNumber>31</SqlColumnNumber>
+<SqlFieldName>fcreate</SqlFieldName>
+</Property>
+
+<Method name="%OnBeforeSave">
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	set ..fupdate = $zdt($NOW(),3,1,0)
+	QUIT $$$OK
+]]></Implementation>
+</Method>
+
+<Storage name="Default">
+<Type>%Storage.Persistent</Type>
+<DataLocation>^interop.base.BaseD</DataLocation>
+<DefaultData>BaseDefaultData</DefaultData>
+<IdLocation>^interop.base.BaseD</IdLocation>
+<IndexLocation>^interop.base.BaseI</IndexLocation>
+<StreamLocation>^interop.base.BaseS</StreamLocation>
+<Data name="BaseDefaultData">
+<Value name="1">
+<Value>%%CLASSNAME</Value>
+</Value>
+<Value name="2">
+<Value>fupdate</Value>
+</Value>
+<Value name="3">
+<Value>fcreate</Value>
+</Value>
+</Data>
+</Storage>
+</Class>
+<Class name="interop.db.Cargos">
+<Super>%Persistent</Super>
+
+<Property name="cargos">
+<Type>%String</Type>
+<Parameter name="MAXLEN" value="30"/>
+</Property>
+
+<Storage name="Default">
+<Type>%Storage.Persistent</Type>
+<DataLocation>^interop.db.CargosD</DataLocation>
+<DefaultData>CargosDefaultData</DefaultData>
+<IdLocation>^interop.db.CargosD</IdLocation>
+<IndexLocation>^interop.db.CargosI</IndexLocation>
+<StreamLocation>^interop.db.CargosS</StreamLocation>
+<Data name="CargosDefaultData">
+<Value name="1">
+<Value>%%CLASSNAME</Value>
+</Value>
+<Value name="2">
+<Value>cargos</Value>
+</Value>
+</Data>
+</Storage>
+</Class>
+<Class name="interop.db.Catalogos">
+<Super>%Persistent,interop.base.Base</Super>
+
+<Property name="catnombre">
+<Type>%String</Type>
+</Property>
+
+<Property name="catdesc">
+<Type>%String</Type>
+<Parameter name="MAXLEN" value="500"/>
+</Property>
+
+<Storage name="Default">
+<Type>%Storage.Persistent</Type>
+<DataLocation>^interop.db.CatalogosD</DataLocation>
+<DefaultData>CatalogosDefaultData</DefaultData>
+<IdLocation>^interop.db.CatalogosD</IdLocation>
+<IndexLocation>^interop.db.CatalogosI</IndexLocation>
+<StreamLocation>^interop.db.CatalogosS</StreamLocation>
+<Data name="CatalogosDefaultData">
+<Value name="1">
+<Value>%%CLASSNAME</Value>
+</Value>
+<Value name="2">
+<Value>catnombre</Value>
+</Value>
+<Value name="3">
+<Value>catdesc</Value>
+</Value>
+<Value name="4">
+<Value>fcreate</Value>
+</Value>
+<Value name="5">
+<Value>fupdate</Value>
+</Value>
+</Data>
+</Storage>
+</Class>
+<Class name="interop.db.Catservicios">
+<Super>%Persistent,interop.base.Base</Super>
+
+<Property name="catalogo">
+<Type>Catalogos</Type>
+</Property>
+
+<Property name="servicios">
+<Type>Servicios</Type>
+</Property>
+
+<Property name="usuario">
+<Type>Usuarios</Type>
+</Property>
+
+<Index name="unico">
+<Properties>catalogo,servicios</Properties>
+<Unique>1</Unique>
+</Index>
+
+<Storage name="Default">
+<Type>%Storage.Persistent</Type>
+<DataLocation>^interop.db.CatserviciosD</DataLocation>
+<DefaultData>CatserviciosDefaultData</DefaultData>
+<IdLocation>^interop.db.CatserviciosD</IdLocation>
+<IndexLocation>^interop.db.CatserviciosI</IndexLocation>
+<StreamLocation>^interop.db.CatserviciosS</StreamLocation>
+<Data name="CatserviciosDefaultData">
+<Value name="1">
+<Value>%%CLASSNAME</Value>
+</Value>
+<Value name="2">
+<Value>catalogo</Value>
+</Value>
+<Value name="3">
+<Value>fcreate</Value>
+</Value>
+<Value name="4">
+<Value>usuario</Value>
+</Value>
+<Value name="5">
+<Value>fupdate</Value>
+</Value>
+<Value name="6">
+<Value>servicios</Value>
+</Value>
+</Data>
+</Storage>
+</Class>
+<Class name="interop.db.Comunas">
+<Super>%Persistent</Super>
+
+<Property name="comuna">
+<Type>%String</Type>
+<Parameter name="MAXLEN" value="100"/>
+</Property>
+
+<Property name="region">
+<Type>%Integer</Type>
+</Property>
+
+<Storage name="Default">
+<Type>%Storage.Persistent</Type>
+<DataLocation>^interop.db.ComunasD</DataLocation>
+<DefaultData>ComunasDefaultData</DefaultData>
+<IdLocation>^interop.db.ComunasD</IdLocation>
+<IndexLocation>^interop.db.ComunasI</IndexLocation>
+<StreamLocation>^interop.db.ComunasS</StreamLocation>
+<Data name="ComunasDefaultData">
+<Value name="1">
+<Value>%%CLASSNAME</Value>
+</Value>
+<Value name="2">
+<Value>comuna</Value>
+</Value>
+<Value name="3">
+<Value>region</Value>
+</Value>
+</Data>
+</Storage>
+</Class>
+<Class name="interop.db.Convenios">
+<Super>%Persistent</Super>
+
+<Property name="numconvenio">
+<Type>%Integer</Type>
+</Property>
+
+<Property name="entidad">
+<Type>Entidades</Type>
+</Property>
+
+<Property name="documento">
+<Type>Documentos</Type>
+</Property>
+
+<Property name="estado">
+<Description>
+SF=Sin Firmar; F=Firmado; </Description>
+<Type>%String</Type>
+<InitialExpression>"SF"</InitialExpression>
+<Parameter name="MAXLEN" value="2"/>
+</Property>
+
+<Index name="pk">
+<IdKey>1</IdKey>
+<PrimaryKey>1</PrimaryKey>
+<Properties>numconvenio</Properties>
+<Unique>1</Unique>
+</Index>
+
+<Storage name="Default">
+<Type>%Storage.Persistent</Type>
+<DataLocation>^interop.db.ConveniosD</DataLocation>
+<DefaultData>ConveniosDefaultData</DefaultData>
+<IdLocation>^interop.db.ConveniosD</IdLocation>
+<IndexLocation>^interop.db.ConveniosI</IndexLocation>
+<StreamLocation>^interop.db.ConveniosS</StreamLocation>
+<Data name="ConveniosDefaultData">
+<Value name="1">
+<Value>%%CLASSNAME</Value>
+</Value>
+<Value name="2">
+<Value>entidad</Value>
+</Value>
+<Value name="3">
+<Value>documento</Value>
+</Value>
+<Value name="4">
+<Value>estado</Value>
+</Value>
+</Data>
+</Storage>
+</Class>
+<Class name="interop.db.Documentos">
+<Super>%Persistent,interop.base.Base</Super>
+
+<Property name="documento">
+<Type>%String</Type>
+</Property>
+
+<Property name="archivo">
+<Type>%String</Type>
+</Property>
+
+<Property name="estado">
+<Type>%String</Type>
+<InitialExpression>"A"</InitialExpression>
+<Parameter name="MAXLEN" value="1"/>
+</Property>
+
+<Storage name="Default">
+<Type>%Storage.Persistent</Type>
+<DataLocation>^interop.db.DocumentosD</DataLocation>
+<DefaultData>DocumentosDefaultData</DefaultData>
+<IdLocation>^interop.db.DocumentosD</IdLocation>
+<IndexLocation>^interop.db.DocumentosI</IndexLocation>
+<StreamLocation>^interop.db.DocumentosS</StreamLocation>
+<Data name="DocumentosDefaultData">
+<Value name="1">
+<Value>%%CLASSNAME</Value>
+</Value>
+<Value name="2">
+<Value>documento</Value>
+</Value>
+<Value name="3">
+<Value>archivo</Value>
+</Value>
+<Value name="4">
+<Value>estado</Value>
+</Value>
+<Value name="5">
+<Value>fcreate</Value>
+</Value>
+<Value name="6">
+<Value>fupdate</Value>
+</Value>
+</Data>
+</Storage>
+</Class>
+<Class name="interop.db.EntServicios">
+<Super>%Persistent,interop.base.Base</Super>
+
+<Property name="servicio">
+<Type>Servicios</Type>
+</Property>
+
+<Property name="entidad">
+<Type>Entidades</Type>
+</Property>
+
+<Property name="estado">
+<Type>%String</Type>
+<InitialExpression>"A"</InitialExpression>
+<Parameter name="MAXLEN" value="1"/>
+</Property>
+
+<Index name="idx1">
+<Properties>servicio,entidad</Properties>
+</Index>
+
+<Storage name="Default">
+<Type>%Storage.Persistent</Type>
+<DataLocation>^interop.db.EntServiciosD</DataLocation>
+<DefaultData>EntServiciosDefaultData</DefaultData>
+<IdLocation>^interop.db.EntServiciosD</IdLocation>
+<IndexLocation>^interop.db.EntServiciosI</IndexLocation>
+<StreamLocation>^interop.db.EntServiciosS</StreamLocation>
+<Data name="EntServiciosDefaultData">
+<Value name="1">
+<Value>%%CLASSNAME</Value>
+</Value>
+<Value name="2">
+<Value>fupdate</Value>
+</Value>
+<Value name="3">
+<Value>entidad</Value>
+</Value>
+<Value name="4">
+<Value>estado</Value>
+</Value>
+<Value name="5">
+<Value>fcreate</Value>
+</Value>
+<Value name="6">
+<Value>servicio</Value>
+</Value>
+</Data>
+</Storage>
+</Class>
+<Class name="interop.db.Entcatalogo">
+<Super>%Persistent,interop.base.Base</Super>
+
+<Property name="entidad">
+<Type>Entidades</Type>
+</Property>
+
+<Property name="catalogo">
+<Type>Catalogos</Type>
+</Property>
+
+<Storage name="Default">
+<Type>%Storage.Persistent</Type>
+<DataLocation>^interop.db.EntcatalogoD</DataLocation>
+<DefaultData>EntcatalogoDefaultData</DefaultData>
+<IdLocation>^interop.db.EntcatalogoD</IdLocation>
+<IndexLocation>^interop.db.EntcatalogoI</IndexLocation>
+<StreamLocation>^interop.db.EntcatalogoS</StreamLocation>
+<Data name="EntcatalogoDefaultData">
+<Value name="1">
+<Value>%%CLASSNAME</Value>
+</Value>
+<Value name="2">
+<Value>entidad</Value>
+</Value>
+<Value name="3">
+<Value>catalogo</Value>
+</Value>
+<Value name="4">
+<Value>fcreate</Value>
+</Value>
+<Value name="5">
+<Value>fupdate</Value>
+</Value>
+</Data>
+</Storage>
+</Class>
+<Class name="interop.db.Entidades">
+<Super>%Persistent,interop.base.Base</Super>
+
+<Property name="entnombre">
+<Type>%String</Type>
+</Property>
+
+<Property name="entdireccion">
+<Type>%String</Type>
+<Parameter name="MAXLEN" value="200"/>
+</Property>
+
+<Property name="comuna">
+<Type>Comunas</Type>
+</Property>
+
+<Property name="tipo">
+<Type>Tipoentidad</Type>
+</Property>
+
+<Property name="catalogo">
+<Type>Catalogos</Type>
+</Property>
+
+<Property name="estado">
+<Type>%String</Type>
+<InitialExpression>"I"</InitialExpression>
+<Parameter name="MAXLEN" value="1"/>
+</Property>
+
+<Property name="usraprueba">
+<Type>Usuarios</Type>
+</Property>
+
+<Storage name="Default">
+<Type>%Storage.Persistent</Type>
+<DataLocation>^interop.db.EntidadesD</DataLocation>
+<DefaultData>EntidadesDefaultData</DefaultData>
+<IdLocation>^interop.db.EntidadesD</IdLocation>
+<IndexLocation>^interop.db.EntidadesI</IndexLocation>
+<StreamLocation>^interop.db.EntidadesS</StreamLocation>
+<Data name="EntidadesDefaultData">
+<Value name="1">
+<Value>%%CLASSNAME</Value>
+</Value>
+<Value name="2">
+<Value>entnombre</Value>
+</Value>
+<Value name="3">
+<Value>entdireccion</Value>
+</Value>
+<Value name="4">
+<Value>comuna</Value>
+</Value>
+<Value name="5">
+<Value>tipo</Value>
+</Value>
+<Value name="6">
+<Value>fcreate</Value>
+</Value>
+<Value name="7">
+<Value>fupdate</Value>
+</Value>
+<Value name="8">
+<Value>catalogo</Value>
+</Value>
+<Value name="9">
+<Value>estado</Value>
+</Value>
+<Value name="10">
+<Value>usraprueba</Value>
+</Value>
+</Data>
+</Storage>
+</Class>
+<Class name="interop.db.Firmas">
+<Super>%Persistent,interop.base.Base</Super>
+
+<UDLText name="T">
+<Content><![CDATA[
+// token de autorizacion
+
+]]></Content>
+</UDLText>
+
+<Property name="numdocumento">
+<Type>%String</Type>
+<Parameter name="MAXLEN" value="100"/>
+</Property>
+
+<Property name="formato">
+<Type>Formatos</Type>
+</Property>
+
+<Property name="firmante1">
+<Type>Usuarios</Type>
+</Property>
+
+<Property name="firmante2">
+<Type>Usuarios</Type>
+</Property>
+
+<Property name="firma1">
+<Type>%String</Type>
+<Parameter name="MAXLEN" value="200"/>
+</Property>
+
+<Property name="firma2">
+<Type>%String</Type>
+<Parameter name="MAXLEN" value="200"/>
+</Property>
+
+<Property name="firmadocumento">
+<Type>%String</Type>
+<Parameter name="MAXLEN" value="500"/>
+</Property>
+
+<Index name="firmasidx">
+<Type>index</Type>
+<Properties>firmante1,firmante2</Properties>
+</Index>
+
+<Storage name="Default">
+<Type>%Storage.Persistent</Type>
+<DataLocation>^interop.db.FirmasD</DataLocation>
+<DefaultData>FirmasDefaultData</DefaultData>
+<IdLocation>^interop.db.FirmasD</IdLocation>
+<IndexLocation>^interop.db.FirmasI</IndexLocation>
+<StreamLocation>^interop.db.FirmasS</StreamLocation>
+<Data name="FirmasDefaultData">
+<Value name="1">
+<Value>%%CLASSNAME</Value>
+</Value>
+<Value name="2">
+<Value>fupdate</Value>
+</Value>
+<Value name="3">
+<Value>fcreate</Value>
+</Value>
+<Value name="4">
+<Value>formato</Value>
+</Value>
+<Value name="5">
+<Value>firmante1</Value>
+</Value>
+<Value name="6">
+<Value>firmante2</Value>
+</Value>
+<Value name="7">
+<Value>firma1</Value>
+</Value>
+<Value name="8">
+<Value>firma2</Value>
+</Value>
+<Value name="9">
+<Value>firmadocumento</Value>
+</Value>
+<Value name="10">
+<Value>numdocumento</Value>
+</Value>
+</Data>
+</Storage>
+</Class>
+<Class name="interop.db.Formatos">
+<Super>%Persistent,interop.base.Base</Super>
+
+<Property name="titulo">
+<Type>%String</Type>
+<Parameter name="MAXLEN" value="500"/>
+</Property>
+
+<Property name="titulohtml">
+<Type>%String</Type>
+<Parameter name="MAXLEN" value="1000"/>
+</Property>
+
+<Property name="descripcion">
+<Type>%String</Type>
+<Parameter name="MAXLEN" value="1000"/>
+</Property>
+
+<Property name="cuerpo">
+<Type>%String</Type>
+<Parameter name="MAXLEN" value="99999"/>
+</Property>
+
+<Property name="servicio">
+<Type>%String</Type>
+<Parameter name="MAXLEN" value="1000"/>
+</Property>
+
+<Property name="nombre">
+<Type>%String</Type>
+<Parameter name="MAXLEN" value="200"/>
+</Property>
+
+<Property name="estado">
+<Type>%String</Type>
+<InitialExpression>"A"</InitialExpression>
+<Parameter name="MAXLEN" value="1"/>
+</Property>
+
+<Storage name="Default">
+<Type>%Storage.Persistent</Type>
+<DataLocation>^interop.db.FormatosD</DataLocation>
+<DefaultData>FormatosDefaultData</DefaultData>
+<IdLocation>^interop.db.FormatosD</IdLocation>
+<IndexLocation>^interop.db.FormatosI</IndexLocation>
+<StreamLocation>^interop.db.FormatosS</StreamLocation>
+<Data name="FormatosDefaultData">
+<Value name="1">
+<Value>%%CLASSNAME</Value>
+</Value>
+<Value name="2">
+<Value>fupdate</Value>
+</Value>
+<Value name="3">
+<Value>fcreate</Value>
+</Value>
+<Value name="4">
+<Value>descripcion</Value>
+</Value>
+<Value name="5">
+<Value>cuerpo</Value>
+</Value>
+<Value name="6">
+<Value>servicio</Value>
+</Value>
+<Value name="7">
+<Value>titulo</Value>
+</Value>
+<Value name="8">
+<Value>titulohtml</Value>
+</Value>
+<Value name="9">
+<Value>nombre</Value>
+</Value>
+<Value name="10">
+<Value>estado</Value>
+</Value>
+</Data>
+</Storage>
+</Class>
+<Class name="interop.db.Menu">
+<Super>%Persistent</Super>
+
+<Property name="menu">
+<Type>%String</Type>
+<Parameter name="MAXLEN" value="100"/>
+</Property>
+
+<Property name="texto">
+<Type>%String</Type>
+<Parameter name="MAXLEN" value="100"/>
+</Property>
+
+<Property name="url">
+<Type>%String</Type>
+<Parameter name="MAXLEN" value="300"/>
+</Property>
+
+<Property name="perfil">
+<Type>Cargos</Type>
+<InitialExpression>##class(Cargos).%OpenId("usuario")</InitialExpression>
+</Property>
+
+<Storage name="Default">
+<Type>%Storage.Persistent</Type>
+<DataLocation>^interop.db.MenuD</DataLocation>
+<DefaultData>MenuDefaultData</DefaultData>
+<IdLocation>^interop.db.MenuD</IdLocation>
+<IndexLocation>^interop.db.MenuI</IndexLocation>
+<StreamLocation>^interop.db.MenuS</StreamLocation>
+<Data name="MenuDefaultData">
+<Value name="1">
+<Value>%%CLASSNAME</Value>
+</Value>
+<Value name="2">
+<Value>menu</Value>
+</Value>
+<Value name="3">
+<Value>texto</Value>
+</Value>
+<Value name="4">
+<Value>url</Value>
+</Value>
+<Value name="5">
+<Value>perfil</Value>
+</Value>
+</Data>
+</Storage>
+</Class>
+<Class name="interop.db.Preguntas">
+<Super>%Persistent,interop.base.Base</Super>
+
+<Property name="pregunta">
+<Type>%String</Type>
+<Parameter name="MAXLEN" value="300"/>
+</Property>
+
+<Property name="respuesta">
+<Type>%String</Type>
+<Parameter name="MAXLEN" value="5000"/>
+</Property>
+
+<Property name="estado">
+<Type>%String</Type>
+<InitialExpression>"A"</InitialExpression>
+<Parameter name="MAXLEN" value="1"/>
+</Property>
+
+<Storage name="Default">
+<Type>%Storage.Persistent</Type>
+<DataLocation>^interop.db.PreguntasD</DataLocation>
+<DefaultData>PreguntasDefaultData</DefaultData>
+<IdLocation>^interop.db.PreguntasD</IdLocation>
+<IndexLocation>^interop.db.PreguntasI</IndexLocation>
+<StreamLocation>^interop.db.PreguntasS</StreamLocation>
+<Data name="PreguntasDefaultData">
+<Value name="1">
+<Value>%%CLASSNAME</Value>
+</Value>
+<Value name="2">
+<Value>fupdate</Value>
+</Value>
+<Value name="3">
+<Value>fcreate</Value>
+</Value>
+<Value name="4">
+<Value>estado</Value>
+</Value>
+<Value name="5">
+<Value>pregunta</Value>
+</Value>
+<Value name="6">
+<Value>respuesta</Value>
+</Value>
+</Data>
+</Storage>
+</Class>
+<Class name="interop.db.Servicios">
+<Super>%Persistent,interop.base.Base</Super>
+
+<Property name="servname">
+<Type>%String</Type>
+</Property>
+
+<Property name="servdesc">
+<Type>%String</Type>
+<Parameter name="MAXLEN" value="300"/>
+</Property>
+
+<Property name="jsonreq">
+<Type>%String</Type>
+<Parameter name="MAXLEN" value="1000"/>
+</Property>
+
+<Property name="jsonres">
+<Type>%String</Type>
+<Parameter name="MAXLEN" value="1000"/>
+</Property>
+
+<Property name="metodos">
+<Type>%String</Type>
+</Property>
+
+<Property name="endpoint">
+<Type>%String</Type>
+<Parameter name="MAXLEN" value="400"/>
+</Property>
+
+<Property name="apiversion">
+<Type>%String</Type>
+<Parameter name="MAXLEN" value="10"/>
+</Property>
+
+<Property name="apistatus">
+<Type>%String</Type>
+<InitialExpression>"A"</InitialExpression>
+</Property>
+
+<Property name="url">
+<Type>%String</Type>
+<Parameter name="MAXLEN" value="300"/>
+</Property>
+
+<Property name="image">
+<Type>%String</Type>
+<Parameter name="MAXLEN" value="300"/>
+</Property>
+
+<Storage name="Default">
+<Type>%Storage.Persistent</Type>
+<DataLocation>^interop.db.ServiciosD</DataLocation>
+<DefaultData>ServiciosDefaultData</DefaultData>
+<IdLocation>^interop.db.ServiciosD</IdLocation>
+<IndexLocation>^interop.db.ServiciosI</IndexLocation>
+<StreamLocation>^interop.db.ServiciosS</StreamLocation>
+<Data name="ServiciosDefaultData">
+<Subscript>"Servicios"</Subscript>
+<Value name="1">
+<Value>servname</Value>
+</Value>
+<Value name="2">
+<Value>servdesc</Value>
+</Value>
+<Value name="3">
+<Value>jsonreq</Value>
+</Value>
+<Value name="4">
+<Value>jsonres</Value>
+</Value>
+<Value name="5">
+<Value>metodos</Value>
+</Value>
+<Value name="6">
+<Value>endpoint</Value>
+</Value>
+<Value name="7">
+<Value>apiversion</Value>
+</Value>
+<Value name="8">
+<Value>apistatus</Value>
+</Value>
+<Value name="9">
+<Value>url</Value>
+</Value>
+<Value name="10">
+<Value>image</Value>
+</Value>
+<Value name="11">
+<Value>%%CLASSNAME</Value>
+</Value>
+<Value name="12">
+<Value>fupdate</Value>
+</Value>
+<Value name="13">
+<Value>fcreate</Value>
+</Value>
+</Data>
+</Storage>
+</Class>
+<Class name="interop.db.Tipoentidad">
+<Super>%Persistent</Super>
+
+<Property name="tipoentidad">
+<Type>%String</Type>
+<Parameter name="MAXLEN" value="100"/>
+</Property>
+
+<Storage name="Default">
+<Type>%Storage.Persistent</Type>
+<DataLocation>^interop.db.TipoentidadD</DataLocation>
+<DefaultData>TipoentidadDefaultData</DefaultData>
+<IdLocation>^interop.db.TipoentidadD</IdLocation>
+<IndexLocation>^interop.db.TipoentidadI</IndexLocation>
+<StreamLocation>^interop.db.TipoentidadS</StreamLocation>
+<Data name="TipoentidadDefaultData">
+<Value name="1">
+<Value>%%CLASSNAME</Value>
+</Value>
+<Value name="2">
+<Value>tipoentidad</Value>
+</Value>
+</Data>
+</Storage>
+</Class>
+<Class name="interop.db.Usuarios">
+<Super>%Persistent,interop.base.Base</Super>
+
+<Property name="usrnombre">
+<Type>%String</Type>
+<Parameter name="MAXLEN" value="150"/>
+</Property>
+
+<Property name="usremail">
+<Type>%String</Type>
+<Parameter name="MAXLEN" value="150"/>
+</Property>
+
+<Property name="usrtelefono">
+<Type>%String</Type>
+<Parameter name="MAXLEN" value="15"/>
+</Property>
+
+<Property name="usrrun">
+<Type>%String</Type>
+<Parameter name="MAXLEN" value="15"/>
+</Property>
+
+<Property name="usrclave">
+<Type>%String</Type>
+<Parameter name="MAXLEN" value="60"/>
+</Property>
+
+<Property name="usrgenero">
+<Type>%String</Type>
+<Parameter name="MAXLEN" value="1"/>
+</Property>
+
+<Property name="usrestado">
+<Type>%String</Type>
+<InitialExpression>"A"</InitialExpression>
+<Parameter name="MAXLEN" value="1"/>
+</Property>
+
+<Property name="entidad">
+<Type>Entidades</Type>
+</Property>
+
+<Property name="cargo">
+<Type>Cargos</Type>
+</Property>
+
+<Property name="firmante">
+<Type>%String</Type>
+<InitialExpression>"N"</InitialExpression>
+<Parameter name="MAXLEN" value="1"/>
+</Property>
+
+<Property name="autoridad">
+<Type>%String</Type>
+<Parameter name="MAXLEN" value="150"/>
+</Property>
+
+<Index name="pk">
+<IdKey>1</IdKey>
+<PrimaryKey>1</PrimaryKey>
+<Properties>usremail</Properties>
+<Unique>1</Unique>
+</Index>
+
+<Storage name="Default">
+<Type>%Storage.Persistent</Type>
+<DataLocation>^interop.db.UsuariosD</DataLocation>
+<DefaultData>UsuariosDefaultData</DefaultData>
+<IdLocation>^interop.db.UsuariosD</IdLocation>
+<IndexLocation>^interop.db.UsuariosI</IndexLocation>
+<StreamLocation>^interop.db.UsuariosS</StreamLocation>
+<Data name="UsuariosDefaultData">
+<Value name="1">
+<Value>%%CLASSNAME</Value>
+</Value>
+<Value name="2">
+<Value>fupdate</Value>
+</Value>
+<Value name="3">
+<Value>fcreate</Value>
+</Value>
+<Value name="4">
+<Value>usrtelefono</Value>
+</Value>
+<Value name="5">
+<Value>usrrun</Value>
+</Value>
+<Value name="6">
+<Value>usrclave</Value>
+</Value>
+<Value name="7">
+<Value>usrgenero</Value>
+</Value>
+<Value name="8">
+<Value>usrestado</Value>
+</Value>
+<Value name="9">
+<Value>usrnombre</Value>
+</Value>
+<Value name="10">
+<Value>cargo</Value>
+</Value>
+<Value name="11">
+<Value>entidad</Value>
+</Value>
+<Value name="12">
+<Value>firmante</Value>
+</Value>
+<Value name="13">
+<Value>autoridad</Value>
+</Value>
+</Data>
+</Storage>
+</Class>
+<Class name="servicios.apiUsuarios">
+<Super>%CSP.REST</Super>
+
+<Method name="creaUsuario">
+<Description>
+creaUsuario: Crea un nuevo usuario, usando metodo POST
+DEPRECADO</Description>
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+        set salida={}
+        try {
+            set user = ##class(%DynamicObject).%FromJSON(%request.Content)
+            set u = ##class(interop.db.Usuarios).%New()
+            set u.username = user.username
+            set u.userlogin = user.userlogin
+            set u.userpass = user.userpass
+            set u.usermail = user.usermail
+            set u.upriv    = ##class(interop.data.UserPriv).%OpenId("usuario")
+            set tSC= u.%Save()
+            if tSC=1 { set salida.status="OK" set salida.message="Usuario grabado" }
+        } catch mierror {
+            set salida.message="No se pudo grabar el usuario" set salida.status="NOK"
+        }
+            w salida.%ToJSON()
+            quit $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="registroUsuario">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+        set salida={}
+        try {
+            set user = ##class(%DynamicObject).%FromJSON(%request.Content)
+            set u = ##class(interop.db.Usuarios).%New()
+            set u.usrnombre = user.usrnombre
+            set u.usremail = user.usremail
+            set u.usrtelefono = user.usrtelefono
+            set u.usrrun = user.usrrun
+			set u.usrclave = user.usrclave
+			set u.usrestado = "A"
+			set u.usrgenero = user.usrgenero
+			set u.entidad = ##class(interop.db.Entidades).%OpenId(user.entidad)
+            set u.cargo    = ##class(interop.db.Cargos).%OpenId(user.cargo)
+            set u.autoridad = user.autoridad
+            set tSC= u.%Save()
+            if tSC=1 { set salida.status="OK" set salida.mensaje="Usuario Creado" }
+        } catch mierror {
+            set salida.mensaje="No se pudo grabar el usuario" set salida.status="NOK"
+        }
+            w salida.%ToJSON()
+            quit $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="registroEntidad">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	set salida={}
+	set ent = ##class(%DynamicObject).%FromJSON(%request.Content)
+	set reg = ##class(interop.db.Entidades).%New()
+	try{ 
+		set reg.entnombre = ent.entnombre
+		set reg.entdireccion = ent.entaddress
+		set reg.comuna = ##class(interop.db.Comunas).%OpenId(ent.entcomuna)
+		set reg.tipo = ##class(interop.db.Tipoentidad).%OpenId(ent.tipo)
+		set st = reg.%Save()
+		
+		quit:'st=1
+		
+		set salida.mensaje="Registro Guardado"
+		set salida.estado="OK"
+		set salida.id = reg.%Id()	
+		
+	} catch mierror {
+		set salida.estado="NOK"
+		set salida.mensaje="No se pudo grabar el registro"
+	}
+	w salida.%ToJSON()
+	quit $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="detalleSol">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>id:%Integer</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	set salida = {}
+	try {
+		set sql="select e.entnombre, e.estado, e.fcreate fsolicitud, e.comuna->comuna comuna, u.cargo->cargos cargo, u.usrnombre email, u.usremail email, u.usrtelefono phone, e.usraprueba->ID aprueba from interop_db.Entidades e,interop_db.Usuarios u where e.ID = u.entidad and u.cargo->cargos<>'Administrador' and e.ID="_id
+		set s = ##class(%SQL.Statement).%ExecDirect(,sql)
+		while(s.%Next()){
+			set salida.name=s.entnombre
+			set salida.encargado=s.email
+			set salida.mailencargado = s.email
+			set salida.telefono = s.phone
+			set salida.mail = s.email
+			set salida.cargo = s.cargo
+			set salida.aprobado= s.aprueba
+			set salida.fcrea = s.fsolicitud
+			set salida.estado = s.estado
+			set salida.mensaje="OK"
+		}
+		
+	} catch mierror {
+		set salida.mensaje="No se pudo obtener la solicitud"
+	}
+	w salida.%ToJSON()
+	quit $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="loginUsuario">
+<Description>
+Login usuarios</Description>
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+    set salida={}
+    set u = ##class(%DynamicObject).%FromJSON(%request.Content)
+    
+    set st = ..getUsuario(u.user, u.pass, .user)
+     
+    if (user.estado="OK"){
+	    set salida.username= user.username
+	    set salida.userlogin=user.userlogin
+	    set salida.usermail=user.usermail
+	    set salida.tipo = user.tipo
+	    set salida.logged=user.userlogin_":OK"
+	    set salida.entidad=user.entidad
+	    set salida.firmante = user.firmante
+    } else { 
+    	set salida.mensaje="Error de Login" s salida.estado="NAP"
+    }
+    w salida.%ToJSON()
+    quit $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="getUsuario">
+<Description>
+getUsuario: Lee un usuario por ID (userlogin)</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>id:%String,p:%String,*salida:%String</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+   set salida = {}
+   try {
+		set user = ##class(interop.db.Usuarios).%OpenId(id)
+		
+		if (user.usrclave=p)&&(user.usrestado="A") {
+			set salida.username = user.usrnombre
+			set salida.userlogin = user.usremail
+			set salida.userpass = user.usrclave
+			set salida.usermail = user.usremail
+			set salida.tipo = user.cargo.cargos
+			set salida.firmante = user.firmante
+			set salida.estado="OK"
+			set salida.entidad=user.entidad.%Id()
+		}
+		
+   } catch mierror {
+        set salida.message="Error de ID ME" s salida.estado="NOK"
+   }
+   set Output = salida
+   quit $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="lockUsuario">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>id:%String</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+    set salida = {}
+    try {
+        set u = ##class(interop.db.Usuarios).%OpenId(id,4)
+        set u.status="L"
+        set tSC = u.%Save()
+
+        if tSC=1 {
+            set salida.mensaje="Registro bloqueado: "_id
+        } else {
+            quit
+        }
+
+    } Catch mierror {
+        set salida.mensaje="No se pudo bloquear el registro: " _ id
+    }
+    w salida.%ToJSON()
+    quit $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="validaToken">
+<Description>
+TokenValidator: Valida que el token este correcto</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>login:%String,pass:%String,token:%String</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+    set salida={}
+    set u = ##class(interop.db.Usuarios).pkOpen(login)
+    if u {
+        if (u.userpass=pass){
+            Set isValid = ##class(dc.auth.jwt.JWTGenerator).isValid(token,u.secret,.sc,,.jwt)
+            set salida.p=jwt.payload
+            set salida.t=token
+            set salida.mensaje="OK"
+        }
+    } else {
+        set salida.mensaje="No se puede validar al usuario"
+    }
+    w salida.%ToJSON()
+    quit isValid
+]]></Implementation>
+</Method>
+
+<Method name="lstEntiSinAprobacion">
+<Description>
+Lista entidades sin aprobacion</Description>
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	set salida=[]
+	try {
+			set q = "select ID id,entnombre,comuna->comuna comuna,tipo->tipoentidad tipo, fcreate fsolicitud from interop_db.Entidades where estado='I'"
+			set rs = ##class(%SQL.Statement).%ExecDirect(,q)
+			while (rs.%Next()){
+				set l={}
+				set l.id = rs.id
+				set l.name= rs.entnombre
+				set l.comuna = rs.comuna
+				set l.fcrea = rs.fsolicitud
+				set l.estado = "false"
+				d salida.%Push(l)
+			}
+		} catch mierror {
+			set salida={}
+			set salida.message="Error de datos"
+		}
+		w salida.%ToJSON()
+		quit $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="lstEntidadAprobada">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	set salida=[]
+	try {
+			set q = "select ID id,entnombre,comuna->comuna comuna,tipo->tipoentidad tipo, fcreate fsolicitud from interop_db.Entidades where estado='A'"
+			set rs = ##class(%SQL.Statement).%ExecDirect(,q)
+			while (rs.%Next()){
+				set l={}
+				set l.id = rs.id
+				set l.name= rs.entnombre
+				set l.comuna = rs.comuna
+				set l.fcrea = rs.fsolicitud
+				d salida.%Push(l)
+			}
+		} catch mierror {
+			set salida={}
+			set salida.message="Error de datos"
+		}
+		w salida.%ToJSON()
+		quit $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="apruebaRechazaConvenio">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	set salida={}
+	set r = ##class(%DynamicObject).%FromJSON(%request.Content)
+	
+	try {
+		set c = ##class(interop.db.Entidades).%OpenId(r.id)
+		set c.estado = "A"
+		set c.usraprueba = ##class(interop.db.Usuarios).%OpenId(r.usuario)
+		set tsc=c.%Save()
+
+		if tsc=1 {
+			s salida.mensaje="Convenio Aprobado"
+			set d = ##class(interop.db.Convenios).%New()
+			set d.entidad = ##class(interop.db.Entidades).%OpenId(r.id)
+			set d.documento = ##class(interop.db.Documentos).%OpenId(r.doc)
+			set d.estado="SF"
+			set tSC = d.%Save()
+			if tSC=1 { s salida.mensaje=salida.mensaje_" / Convenio creado" }
+		}
+	} catch mierror {
+		s salida.mensaje="No se pudo cambiar el estado"
+	}
+	w salida.%ToJSON()
+	quit $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="run">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>login:%String</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	set salida={}
+	set u = ##class(interop.db.Usuarios).%OpenId(login)
+	set salida.run = u.usrrun
+	w salida.%ToJSON()
+	
+	quit $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="hayCoordinador">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>e:%Integer=0</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	set dato = e
+	set salida={}
+	&sql(SELECT count(1) INTO :coor from interop_db.Usuarios where usrestado='A' and entidad=:dato and cargo=2)
+	set salida.coordinadores=coor
+	w salida.%ToJSON()
+	q $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="datosConvenio">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	set salida={}
+	
+	try {
+		set r = ##class(%DynamicObject).%FromJSON(%request.Content)
+		
+		set j = ##class(interop.db.Usuarios).%OpenId(r.login)
+		
+		set e = ##class(interop.db.Entidades).%OpenId(r.entidad)
+		
+		set enti = r.entidad
+		&SQL(SELECT top 1 ID,max(fcreate) INTO :coor,:fec FROM interop_db.Usuarios WHERE entidad=:enti and cargo=2) 
+
+		set c = ##class(interop.db.Usuarios).%OpenId(coor)
+		
+			
+		set salida.fecha=$zd($H,15)
+		set salida.entidad=r.entidad
+		set salida.jgenero=j.usrgenero
+		set salida.jnombre=j.usrnombre
+		set salida.jmail = j.usremail
+		set salida.jfono = j.usrtelefono
+		set salida.jrun = j.usrrun
+		set salida.cgenero=c.usrgenero
+		set salida.cnombre=c.usrnombre
+		set salida.cmail = c.usremail
+		set salida.cfono = c.usrtelefono
+		set salida.crun = c.usrrun
+		set salida.ecomuna = e.comuna.comuna
+		set salida.mensaje="Datos encontrados"
+		set salida.estado="OK"
+		
+	} catch mierror {
+		set salida.mensaje="No se encontraron los datos" set salida.estado="NOK"
+	}
+	w salida.%ToJSON()
+	quit $$$OK
+	 
+]]></Implementation>
+</Method>
+
+<Method name="listaUsuarios">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	set salida=[]
+	try {
+			set q = "select usremail, usrnombre, cargo->cargos c, entidad->entnombre e, usrestado from interop_db.Usuarios order by ID"
+			set rs = ##class(%SQL.Statement).%ExecDirect(,q)
+			while (rs.%Next()){
+				set l={}
+				set l.login = rs.usremail
+				set l.nombre = rs.usrnombre
+				set l.cargo = rs.c
+				set l.entidad = rs.e
+				set l.estado = rs.usrestado
+				d salida.%Push(l)
+			}
+		} catch mierror {
+			set salida={}
+			set salida.message="Error de datos"
+		}
+		w salida.%ToJSON()
+		quit 1
+]]></Implementation>
+</Method>
+
+<Method name="cambiaEstadoUsuario">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	set salida={}
+	try {
+		set r = ##class(%DynamicObject).%FromJSON(%request.Content)
+		
+		set u = ##class(interop.db.Usuarios).%OpenId(r.user)
+		
+		if u.usrestado="A" { set u.usrestado="I" } else { set u.usrestado="A" }
+		set t = u.%Save()
+		
+		if t=1 { set salida.message="Usuario Actualizado" set salida.estado="OK" }
+	} catch mierror {
+		set salida.message="No se pudo actualizar el estado" set salida.estado="NOK" 
+	}
+		w salida.%ToJSON()
+		quit $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="firmante">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	&sql(UPDATE interop_db.usuarios set firmante='N' where firmante='S')
+	
+	set salida={}
+	try {
+		set r = ##class(%DynamicObject).%FromJSON(%request.Content)
+		
+		set u = ##class(interop.db.Usuarios).%OpenId(r.firmante)
+		
+		set u.firmante="S"
+		set t = u.%Save()
+		
+		if t=1 { set salida.message="Firmante Actualizado" set salida.estado="OK" }
+	} catch mierror {
+		set salida.message="No se pudo actualizar el firmante" set salida.estado="NOK" 
+	}
+		w salida.%ToJSON()
+		quit $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="listaAdmin">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	set salida=[]
+	try {
+			set q = "select usremail, usrnombre, cargo->cargos c,usrtelefono, entidad->entnombre e, usrestado,firmante from interop_db.Usuarios where cargo=3 order by ID"
+			set rs = ##class(%SQL.Statement).%ExecDirect(,q)
+			while (rs.%Next()){
+				set l={}
+				set l.login = rs.usremail
+				set l.nombre = rs.usrnombre
+				set l.cargo = rs.c
+				set l.entidad = rs.e
+				set l.estado = rs.usrestado
+				set l.firmante = rs.firmante
+				set l.telefono = rs.usrtelefono 
+				d salida.%Push(l)
+			}
+		} catch mierror {
+			set salida={}
+			set salida.message="Error de datos"
+		}
+		w salida.%ToJSON()
+		quit $$$OK
+]]></Implementation>
+</Method>
+</Class>
+<Class name="servicios.apiCatalogos">
+
+<Method name="listaApis">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+      set salida = []
+      set salida.error=""
+      try {
+        set query = "select * from data.apis where apistatus='A'"
+        set rs = ##class(%SQL.Statement).%ExecDirect(,query)
+        while (rs.%Next()){
+           set l = {}
+           s l.apiid = rs.id
+           s l.apiname = rs.apiname
+           s l.apidesc = rs.apidesc
+           s l.apiepoint = rs.apiepoint
+           s l.apimethod = rs.apimethod
+           s l.apiowner = rs.apiowner
+           s l.apiclass = rs.apiclass
+           s l.apicreate = rs.apicreate
+           s l.apiupdate = rs.apiupdate
+           s l.apiversion = rs.apiversio
+           s l.apiaccess = rs.apiaccess
+           d salida.%Push(l) 
+           k l
+        }
+      } catch mierror {
+        set salida.mensaje="No hay datos para mostrar"
+        set salida.error = mierror.AsStatus()
+      }
+      w salida.%ToJSON()
+      QUIT $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="serviciosCatalogo">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>e:%Integer</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	set salida=[]
+	set sql="select servicio->ID id,servicio->servname name, servicio->servdesc des from interop_db.entservicios where entidad="_e_" and estado='A' order by 1"
+	try {
+		set rs = ##class(%SQL.Statement).%ExecDirect(,sql)
+		while (rs.%Next()){
+			set l={}
+			set l.id = rs.id
+			set l.name = rs.name
+			set l.desc = rs.des
+			d salida.%Push(l)
+			k l	
+		}
+	} catch mierror {
+		s l={} s l.mensaje="No hay servicios disponibles" s l.estado="NOK"
+		d salida.%Push(l)
+	}
+	
+	w salida.%ToJSON()
+	
+	quit $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="listaNombreApis">
+<Description>
+listaNombreApis: Genera el listado de nombres para evitar que se dupliquen, se usa en los formularios</Description>
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+    set salida = []
+    try {
+      set query = "select * from interop_db.Servicios"
+      set rs = ##class(%SQL.Statement).%ExecDirect(,query)
+      while (rs.%Next()){
+          set l = {}
+          set l.id= rs.ID
+          set l.nombre = rs.servname
+          set l.desc = rs.servdesc
+          set l.estado = rs.apistatus
+          d salida.%Push(l)
+          k l
+      }
+    } catch mierror {
+      set salida.mensaje="No hay datos para mostrar"
+    }
+    w salida.%ToJSON()
+    QUIT $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="detalleAPI">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>id:%String</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+    set salida={}
+    set d = ##class(interop.db.Servicios).%OpenId(id)
+    set salida.id = id
+    set salida.nombre = d.servname
+    set salida.desc = d.servdesc
+    set salida.req = d.jsonreq
+    set salida.res = d.jsonres
+    set salida.version = d.apiversion
+    set salida.estado = d.apistatus
+    set salida.epoint = d.endpoint
+    set salida.url = d.url
+    set salida.metodos = d.metodos
+    w salida.%ToJSON()
+
+    quit $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="detalleAPI2">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>id:%String</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+    set salida={}
+    set d = ##class(interop.db.Servicios).%OpenId(id)
+    set salida.id = id
+    set salida.servname = d.servname
+    set salida.servdesc = d.servdesc
+    set salida.jsonreq = d.jsonreq
+    set salida.jsonres = d.jsonres
+    set salida.apiversion = d.apiversion
+    set salida.apistatus = d.apistatus
+    set salida.endpoint = d.endpoint
+    set salida.url = d.url
+    set salida.metodos = d.metodos
+
+    w salida.%ToJSON()
+
+    quit $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="nuevoServicio">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+  set salida={}
+  set d = ##class(%DynamicObject).%FromJSON(%request.Content)
+  set s = ##class(interop.db.Servicios).%New()
+  set s.servname   = d.servname  
+  set s.servdesc   = d.servdesc  
+  set s.jsonreq    = d.jsonreq   
+  set s.jsonres    = d.jsonres   
+  set s.metodos    = d.metodos   
+  set s.endpoint   = d.endpoint  
+  set s.apiversion = d.apiversion
+  set tSC=s.%Save()
+  
+  if tSC=1 { s salida.mensaje="Servicio guardado" s salida.estado="OK" } else {s salida.mensaje="Servicio no se pudo guardar" s salida.estado="NOK"}
+  w salida.%ToJSON()
+  quit $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="actualizaServicio">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+  set salida={}
+  set d = ##class(%DynamicObject).%FromJSON(%request.Content)
+  set s = ##class(interop.db.Servicios).%OpenId(d.id)
+  set s.servname   = d.servname  
+  set s.servdesc   = d.servdesc  
+  set s.jsonreq    = d.jsonreq   
+  set s.jsonres    = d.jsonres   
+  set s.metodos    = d.metodos   
+  set s.endpoint   = d.endpoint  
+  set s.apiversion = d.apiversion
+  set tSC=s.%Save()
+  
+  if tSC=1 { s salida.mensaje="Servicio actualizado" s salida.estado="OK" } else {s salida.mensaje="Servicio no se pudo actualizar" s salida.estado="NOK"}
+  w salida.%ToJSON()
+  quit $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="creaCatalogo">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+  set salida={}
+  try {
+      set req = ##class(%DynamicObject).%FromJSON(%request.Content)
+      set u = ##class(interop.db.Catalogos).%New()
+      set u.catnombre=req.catnombre
+      set u.catdesc = req.catdesc
+      set tSC= u.%Save()
+      if tSC=1 { set salida.status="OK" set salida.message="Catalogo grabado"  set salida.id=u.%Id()}
+  } catch mierror {
+      set salida.mensaje="No se pudo grabar Catalogo" set salida.estado="NOK"
+  }
+      w salida.%ToJSON()
+      quit $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="catservicios">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+        set salida={}
+        try {
+            set req = ##class(%DynamicObject).%FromJSON(%request.Content)
+            set u = ##class(interop.db.Catservicios).%New()
+            set u.catalogo = ##class(interop.db.Catalogos).%OpenId(req.catalogo)
+            set u.usuario = ##class(interop.db.Usuarios).pkOpen(req.usuario)
+            set u.servicios = ##class(interop.db.Servicios).%OpenId(req.servicio)
+            set tSC= u.%Save()
+            if tSC=1 { set salida.status="OK" set salida.message="Cat Servicio grabado" }
+        } catch mierror {
+            set salida.message="No se pudo grabar Cat Servicio o el servicio ya existe en el catalogo seleccionado" set salida.status="NOK"
+        }
+        w salida.%ToJSON()
+        quit $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="catalogo">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>id:%String</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+  set salida={}
+  set o = ##class(interop.db.Catalogos).%OpenId(id)
+  set salida.idcatalogo = id
+  set salida.catnombre = o.catnombre
+  set salida.catdesc = o.catdesc
+  set salida.fcreate = o.fcreate
+  
+  write salida.%ToJSON()
+  quit $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="listaServiciosPorCatalogo">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>id:%String</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+  set salida=[]
+    try {
+        set query = "select servicios->ID, servicios->servname ser, servicios->servdesc des from interop_db.catservicios where catalogo="_id
+        set rs = ##class(%SQL.Statement).%ExecDirect(,query)
+        while (rs.%Next()){
+            set l = {}
+            set l.id = rs.ID
+            set l.servicio = rs.ser
+            set l.desc = rs.des
+            d salida.%Push(l)
+            k l
+        }
+    } catch mierror {
+        set salida.mensaje="No hay datos para mostrar"
+    }
+    w salida.%ToJSON()
+  
+  quit $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="menuEntidad">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>p:%String</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+  set salida=[]
+
+  set sql="select * from interop_db.Menu where perfil = (select ID from interop_db.Cargos where cargos='"_p_"')"
+
+  set rs = ##class(%SQL.Statement).%ExecDirect(,sql)
+  while ( rs.%Next()){
+    set l = {}
+    set l.menu = rs.menu
+    set l.texto = rs.texto
+    set l.url = rs.url
+    d salida.%Push(l)
+    k l
+  }
+  
+  w salida.%ToJSON()
+  quit $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="listaConveniosPorFirmar">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+  set salida=[]
+  set sql="select ID codigo, formato, formato->titulo thtml, firmante1->usrnombre fir, fcreate, numdocumento, firmante1->entidad->entnombre entidad, firmante1->entidad->id identidad, firma2 from interop_db.Firmas where firmante1 is not null and firma1 is not null"
+  set rs = ##class(%SQL.Statement).%ExecDirect(,sql)
+  while(rs.%Next()){
+    set l = {}
+    set l.codigo = rs.codigo
+    set l.documento = rs.thtml
+    set l.firmante = rs.fir
+    set l.fecha = rs.fcreate
+    set l.numdoc = rs.numdocumento
+    set l.entidad = rs.entidad
+    set l.identidad = rs.identidad
+    if $L(rs.firma2)>0 { set estado="Pendiente" } else { set estado="Firmado" }
+    set l.estado = estado
+    set l.convenio = rs.formato
+    Do salida.%Push(l)
+    k l
+  }
+  w salida.%ToJSON()
+  quit $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="listaEntidades">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+  set salida = []
+  try {
+    set query = "select ID codigo,tipoentidad  from interop_db.Tipoentidad"
+    set rs = ##class(%SQL.Statement).%ExecDirect(,query)
+    while (rs.%Next()){
+       set l = {}
+       set l.codigo = rs.codigo
+       set l.entidad = rs.tipoentidad
+       d salida.%Push(l)
+       k l
+    }
+  } catch mierror {
+    set salida.mensaje="No hay datos para mostrar"
+  }
+  w salida.%ToJSON()
+  QUIT $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="comunas">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+  set salida = []
+  try {
+    set query = "select ID codigo, comuna from interop_db.comunas order by comuna"
+    set rs = ##class(%SQL.Statement).%ExecDirect(,query)
+    while (rs.%Next()){
+       set l = {}
+       set l.codigo = rs.codigo
+       set l.comuna = rs.comuna
+       d salida.%Push(l)
+       k l
+    }
+  } catch mierror {
+    set salida.mensaje="No hay datos para mostrar"
+  }
+  w salida.%ToJSON()
+  QUIT $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="firma">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	if (^NumeroConvenio>0){
+		set numero = ^NumeroConvenio+1
+		set ^NumeroConvenio=^NumeroConvenio+1
+	} else {
+		set numero = 1
+		set ^NumeroConvenio=numero
+	}
+	try {
+		set salida={}
+		set rs = ##class(%DynamicObject).%FromJSON(%request.Content)
+		set f = ##class(interop.db.Firmas).%New()
+		set f.convenio="convenio-"_numero_".docx"
+		set f.documento = "convenio-"_numero
+		set f.firma = rs.firma
+		set f.firmado="SI"
+		set f.firmante = rs.firmante
+		set f.numdocumento = numero
+		set f.usrrun= rs.run
+		set f.entidad = ##class(interop.db.Entidades).%OpenId(rs.entidad)
+		
+		set tSC=f.%Save()
+		if (tSC=1){
+		 set salida.mensaje="Documento firmado" set salida.estado="OK"
+		} 
+	} catch mierror {
+		set salida.mensaje="Documento no se pudo firmar" set salida.estado="NOK"
+	}
+	w salida.%ToJSON()
+	quit $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="matriz">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	set salida=[]
+	set en = ""
+	set linea = ""
+	set sql="select paso.a eid, paso.b sid, paso.c entidad, ese.estado estado from (select  e.ID a, s.ID b, e.entnombre c, s.servname d from  interop_db.Entidades e cross join interop_db.Servicios s where e.estado='A') paso left outer join interop_db.EntServicios ese on ese.entidad = paso.a and ese.servicio =paso.b order by 1,2"
+	set rs = ##class(%SQL.Statement).%ExecDirect(,sql)
+	while (rs.%Next()){		
+
+		if rs.estado="A" {
+			set boton = "OK-"_rs.eid_"-"_rs.sid
+		} else {
+			set boton = "NO-"_rs.eid_"-"_rs.sid
+		}
+		
+		if en="" {
+			s en=rs.eid
+			s linea=rs.entidad_"|"_boton
+		} else {
+			if en=rs.eid {
+				s linea=linea_"|"_boton
+			} else {
+				d salida.%Push(linea)
+				s en=rs.eid
+				s linea = rs.entidad_"|"_boton
+			}
+		}
+				
+	}
+	d salida.%Push(linea)
+
+	
+
+	w salida.%ToJSON()
+	quit $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="activaServicio">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>s:%String</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	set estado=$P(s,"-")
+	set enti=$P(s,"-",2)
+	set servi=$P(s,"-",3)
+	set salida={}
+	&sql(select ID into :idservicio from interop_db.EntServicios where entidad=:enti and servicio=:servi)
+
+	if (estado="NO") && ('idservicio) {
+		set es = ##class(interop.db.EntServicios).%New()
+		set es.estado="A"
+		set es.entidad=##class(interop.db.Entidades).%OpenId(enti)
+		set es.servicio=##class(interop.db.Servicios).%OpenId(servi)
+		set salida.mensaje="Servicio activado"
+	} 
+	if (estado="NO") && (idservicio){
+		set es = ##class(interop.db.EntServicios).%OpenId(idservicio)
+		set es.estado="A"
+		set salida.mensaje="Servicio activo"
+	}
+	if (estado="OK") && (idservicio){
+		set es = ##class(interop.db.EntServicios).%OpenId(idservicio)
+		set es.estado="I"
+		set salida.mensaje="Servicio inactivo"
+	}
+	set tSC= es.%Save()
+	w salida.%ToJSON()
+	quit $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="activaTodos">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>s:%String</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	set estado=$P(s,"-")
+	set enti=$P(s,"-",2)
+	set servi=$P(s,"-",3)
+	set salida={}
+	try {
+		set sql="select ID from interop_db.Servicios where apistatus='A' order by 1"
+		set rs = ##class(%SQL.Statement).%ExecDirect(,sql)
+		while (rs.%Next()){
+			&SQL(select ID,estado into :cuenta,:esta from interop_db.EntServicios where entidad=:enti and servicio=:rs.ID)
+			
+			if (cuenta>0)&&(esta="I")
+			{
+				set ser = ##class(interop.db.EntServicios).%OpenId(cuenta)
+				set ser.estado="A"
+				set tSC = ser.%Save()
+			} 
+			if ('cuenta){
+				set ser = ##class(interop.db.EntServicios).%New()
+				set ser.estado="A"
+				set ser.entidad=##class(interop.db.Entidades).%OpenId(enti)
+				set ser.servicio=##class(interop.db.Servicios).%OpenId(rs.ID)
+				set tSC = ser.%Save()
+			}
+		}
+	} catch mierror {
+		set salida.mensaje="Error en la activación de todos los servicios"
+	}
+	set salida.mensaje="Servicios activados"
+	w salida.%ToJSON()
+	quit $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="listaqa">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	set salida=[]
+	try {
+			set q = "select * from interop_db.Preguntas where estado='A' order by ID"
+			set rs = ##class(%SQL.Statement).%ExecDirect(,q)
+			while (rs.%Next()){
+				set l={}
+				set l.p = rs.pregunta
+				set l.r = rs.respuesta
+				set l.e = rs.estado
+				d salida.%Push(l)
+			}
+		} catch mierror {
+			set salida={}
+			set salida.message="Error de datos"
+		}
+		w salida.%ToJSON()
+		quit $$$OK 
+]]></Implementation>
+</Method>
+
+<Method name="listaqanuevo">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	set salida={}
+	try {
+		set r = ##class(%DynamicObject).%FromJSON(%request.Content)
+		set u = ##class(interop.db.Preguntas).%New()
+		set u.pregunta = r.pregunta
+		set u.respuesta = r.respuesta
+		
+		set tSC= u.%Save()
+		if tSC=1 {
+			set salida.message="Pregunta grabada!"
+			set salida.estado="OK"
+		}
+		
+	} catch mierror {
+		set salida.message="No se pudo grabar la pregunta" set salida.estado="NOK"
+	}
+	w salida.%ToJSON()
+	quit $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="listaConveniosDisponibles">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>entidad:%Integer</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	set salida=[]
+	try {
+			set q = "select f.id codigo, f.nombre formato, f.descripcion, fi.firma1, fi.numdocumento from interop_db.Firmas fi, interop_db.Formatos f where fi.formato=f.id and f.estado ='A' and ,fi.firmante1->entidad="_entidad
+			set rs = ##class(%SQL.Statement).%ExecDirect(,q)
+			while (rs.%Next()){
+				set l={}
+				set l.nombre = rs.formato
+				set l.descripcion = rs.descripcion
+				set l.codigo = rs.codigo
+				d salida.%Push(l)
+			}
+		} catch mierror {
+			set salida={}
+			set salida.message="Error de datos" set salida.estado="NOK"
+		}
+		w salida.%ToJSON()
+		quit $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="firmaConvenioFirma1">
+<ClassMethod>1</ClassMethod>
+<Implementation><![CDATA[
+	set salida={}
+	
+	if ($Data(^NumDocumentoConvenio)=0) {
+		set ^NumDocumentoConvenio=100
+	} 
+	set numdoc = ^NumDocumentoConvenio +1
+	try {
+		set r = ##class(%DynamicObject).%FromJSON(%request.Content)
+		set u = ##class(interop.db.Usuarios).%OpenId(r.firma1)
+		set f = ##class(interop.db.Firmas).%New()
+		set f.firma1=$zconvert(u.usrnombre_"\n"_u.autoridad_"\n"_u.usrrun,"U")
+		set f.firmante1 = ##class(interop.db.Usuarios).%OpenId(r.firma1)
+		set f.formato = ##class(interop.db.Formatos).%OpenId(r.documento)
+		set f.numdocumento = numdoc
+		
+		set tSC= f.%Save()
+		if tSC=1 {
+		 set salida.estado="OK" set salida.message="Documento Firmado!"
+		} 
+		
+	} catch mierror {
+		set salida.message="No se pudo Firmar "_$zerror s salida.estado="NOK"
+	}
+		w salida.%ToJSON()
+		quit $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="firmaConvenioFirma2">
+<ClassMethod>1</ClassMethod>
+<Implementation><![CDATA[
+	set salida={}
+	try {
+		set r = ##class(%DynamicObject).%FromJSON(%request.Content)
+		set u = ##class(interop.db.Usuarios).%OpenId(r.firma2)
+		set f = ##class(interop.db.Firmas).%OpenId(r.documento)
+		set f2=$zconvert(u.usrnombre_"\n"_u.autoridad_"\n"_u.usrrun,"U")
+		set f.firma2=f2
+		set f.firmante2=##class(interop.db.Usuarios).%OpenId(r.firma2)
+		// Hashdoc es la suma de numdoc || firma1 || firma2 codificado
+		set hashdoc= ##class(%xsd.hexBinary).LogicalToXSD($SYSTEM.Encryption.MD5Hash(r.documento_"||"_f.numdocumento_"||"_f.firma1_"||"_f2))
+		set f.firmadocumento = $SYSTEM.Encryption.Base64Encode(r.documento_"||"_f.numdocumento_"||"_f.firma1_"||"_f2_"."_hashdoc)
+		
+		set tSC=f.%Save()
+		
+		if tSC=1 {
+			set salida.message="Documento firmado correctamente!" set salida.estado="OK"
+		}
+	
+	} catch mierror {
+		set salida.message="No se pudo Firmar" s salida.estado="NOK" s salida.error=$zerror
+	}
+	
+	w salida.%ToJSON()
+	
+	quit $$$OK
+	
+]]></Implementation>
+</Method>
+
+<Method name="ValidaCodigo">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>cod:%String</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	set salida={}
+	try {
+		set codigo = $system.Encryption.Base64Decode(cod)
+		set deco = $P(codigo,".",1)
+		set llave = $P(codigo,".",2)
+		set hashdoc= ##class(%xsd.hexBinary).LogicalToXSD($SYSTEM.Encryption.MD5Hash(deco))
+		if hashdoc=llave {
+			set c = $P(deco,"||",1)
+			set firma = ##class(interop.db.Firmas).%OpenId(c)
+			set registro = firma.%Id()_"||"_firma.numdocumento_"||"_firma.firma1_"||"_firma.firma2
+			if registro=deco {
+				set salida.estado="OK" set salida.message="Códigos validados, orden de llaves correcto"
+			} else {
+				set salida.estado="NOK" set salida.message="Códigos no validos, valide la informacion"
+			}
+		}
+	} catch mierror {
+		set salida.message="Error en validación" set salida.estado="NOK"
+	}
+	w salida.%ToJSON()
+	quit $$$OK
+]]></Implementation>
+</Method>
+</Class>
+<Class name="servicios.apiData">
+<Super>%CSP.REST</Super>
+
+<Method name="templates">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>id:%String</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	try {
+		set salida={}
+		set t = ##class(interop.db.Formatos).%OpenId(id)
+		set salida.titulo = t.titulo
+		set salida.descripcion = t.descripcion
+		set salida.cuerpo = t.cuerpo
+		set salida.servicio = t.servicio
+		set salida.nombre = t.nombre
+	} catch mierror {
+		set salida.mensaje="No se encontraron los datos T1" set salida.estado="NOK"
+	}
+	w salida.%ToJSON()
+	quit $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="templatesnuevo">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	set salida={}
+	try {
+		set r = ##class(%DynamicObject).%FromJSON(%request.Content)
+		set t = ##class(interop.db.Formatos).%New()
+		set t.titulo = r.titulo
+		set t.titulohtml = r.tituloHtml
+		set t.descripcion = r.descripcion
+		set t.cuerpo = r.cuerpo
+		set t.servicio = r.servicio
+		
+		set tSC=t.%Save()
+		
+		if tSC=1 { set salida.message="Datos Guardados" set salida.estado="OK" }
+	} catch mierror {
+		set salida.message="No se pudo grabar" set salida.estado="NOK"
+	}
+		w salida.%ToJSON()
+		quit $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="templateLista">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	set salida=[]
+	try {
+			set q = "select ID codigo,nombre, titulo, descripcion, fcreate, fupdate from interop_db.Formatos"
+			set rs = ##class(%SQL.Statement).%ExecDirect(,q)
+			while (rs.%Next()){
+				set l={}
+				set l.codigo = rs.codigo
+				set l.titulo = rs.titulo
+				set l.descripcion = rs.descripcion
+				set l.fcrea = rs.fcreate
+				set l.fup = rs.fupdate
+				set l.nombre = rs.nombre
+				d salida.%Push(l)
+			}
+	} catch mierror {
+		set salida={}
+		set salida.message="Error de datos"
+	}
+	w salida.%ToJSON()
+	quit $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="visorConveniosJPL">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	set salida={}
+	
+	try {
+		set r = ##class(%DynamicObject).%FromJSON(%request.Content)
+		set j = ##class(interop.db.Usuarios).%OpenId(r.login)
+		set e = ##class(interop.db.Entidades).%OpenId(r.entidad)
+		set meses="Enero,Febrero,Marzo,Abril,Mayo,Junio,Julio,Agosto,Septiembre,Octubre,Noviembre,Diciembre"
+		set enti = r.entidad
+		set sqlcoordinadores = "SELECT * FROM interop_db.Usuarios WHERE entidad=:enti and cargo=2 and usrestado='A'"
+		&SQL(SELECT top 1 ID,max(fcreate) INTO :coor,:fec FROM interop_db.Usuarios WHERE entidad=:enti and cargo=2 and usrestado='A') 
+		
+		set c = ##class(interop.db.Usuarios).%OpenId(coor)
+		set f = ##class(interop.db.Formatos).%OpenId(r.convenio)
+		
+		set fecha = $zd($H,15)
+		set salida.fecha=fecha
+		set salida.dia=$P(fecha,"/",1)
+		set mes=$P(fecha,"/",2)
+		set salida.mes=$P(meses,",",(+mes))
+		set salida.anno=$P(fecha,"/",3)
+		set salida.entidad=r.entidad
+		set salida.autoridadgenero=j.usrgenero
+		
+		if j.usrgenero="M" {
+			set salida.autoridad="El JUEZ"
+			set salida.sr="Sr."
+			set salida.don="don"
+			set salida.elsrjuez="El sr. Juez"
+		} else {
+			set salida.autoridad="La JUEZA"
+			set salida.sr="Sra."
+			set salida.don="doña"
+			set salida.elsrjuez="La sra. Jueza"
+		}
+		set salida.autoridadnombre=j.usrnombre
+		set salida.autoridadmail = j.usremail
+		set salida.autoridadfono = j.usrtelefono
+		set salida.autoridadrun = j.usrrun
+		set salida.autoridaddireccion=e.entdireccion
+		set salida.cgenero=c.usrgenero
+		set salida.cnombre=c.usrnombre
+		set salida.cmail = c.usremail
+		set salida.cfono = c.usrtelefono
+		set salida.crun = c.usrrun
+		set salida.comuna = e.comuna.comuna
+		set salida.titulohtml= f.titulohtml
+		set salida.cuerpo = f.cuerpo
+		set salida.mensaje="Datos encontrados"
+		set salida.estado="OK"
+		
+	} catch mierror {
+		set salida.mensaje="No se encontraron los datos E1" set salida.estado="NOK"
+		set salida.error = mierror
+	}
+	w salida.%ToJSON()
+	quit $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="datosCovenio">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	set salida={}
+	
+	try {
+		set r = ##class(%DynamicObject).%FromJSON(%request.Content)
+		set j = ##class(interop.db.Usuarios).%OpenId(r.login)
+		set e = ##class(interop.db.Entidades).%OpenId(r.entidad)
+		set enti = r.entidad
+		&SQL(SELECT top 1 ID,max(fcreate) INTO :coor,:fec FROM interop_db.Usuarios WHERE entidad=:enti and cargo=2 and usrestado='A') 
+		
+		set meses="Enero,Febrero,Marzo,Abril,Mayo,Junio,Julio,Agosto,Septiembre,Octubre,Noviembre,Diciembre"
+		
+		
+		set c = ##class(interop.db.Usuarios).%OpenId(coor)
+		set f = ##class(interop.db.Formatos).%OpenId(r.convenio)
+		set fecha = $zd($H,15)
+		set salida.fecha=fecha
+		set salida.dia=$P(fecha,"/",1)
+		set salida.mes=meses(+$P(fecha,"/",2))
+		set salida.anno=$P(fecha,"/",3)
+		set salida.entidad=r.entidad
+		set salida.autoridadgenero=j.usrgenero
+		
+		if j.usrgenero="M" {
+			set salida.juez="El JUEZ"
+			set salida.sr="Sr."
+			set salida.don="don"
+		} else {
+			set salida.juez="La JUEZA"
+			set salida.sr="Sra."
+			set salida.don="doña"
+		}
+		set salida.autoridadnombre=j.usrnombre
+		set salida.autoridadmail = j.usremail
+		set salida.autoridadfono = j.usrtelefono
+		set salida.autoridadrun = j.usrrun
+		set salida.autoridaddireccion=e.entdireccion
+		set salida.coordinadorgenero=c.usrgenero
+		set salida.coordinadornombre=c.usrnombre
+		set salida.coordinadormail = c.usremail
+		set salida.coordinadorfono = c.usrtelefono
+		set salida.coordinadorrun = c.usrrun
+		set salida.comuna = e.comuna.comuna
+		set salida.titulohtml= f.titulohtml
+		set salida.cuerpo = f.cuerpo
+		set salida.mensaje="Datos encontrados"
+		set salida.estado="OK"
+		
+	} catch mierror {
+		set salida.mensaje="No se encontraron los datos E1" set salida.estado="NOK"
+		set salida.error = mierror
+	}
+	w salida.%ToJSON()
+	quit $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="actualizaTemplate">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	set salida={}
+	try {
+		set r = ##class(%DynamicObject).%FromJSON(%request.Content)
+		set u = ##class(interop.db.Formatos).%OpenId(r.tid)
+		
+		set u.titulo=r.titulo
+		set u.nombre = r.nombre
+		set u.descripcion = r.descripcion
+		set u.cuerpo = r.cuerpo
+		set u.servicio = r.servicio
+		
+		set t = u.%Save()
+		set salida.message="Datos Guardados" set salida.estado="OK"
+		
+	} catch mierror {
+		set salida.message="No se pudo grabar" set salida.estado="NOK"
+	}
+		w salida.%ToJSON()
+		quit $$$OK
+]]></Implementation>
+</Method>
+</Class>
+<Class name="servicios.dispInterop">
+<Super>%CSP.REST</Super>
+
+<Parameter name="CONTENTTYPE">
+<Default>application/json</Default>
+</Parameter>
+
+<Parameter name="CHARSET">
+<Default>UTF-8</Default>
+</Parameter>
+
+<XData name="UrlMap">
+<Data><![CDATA[
+<Routes>
+    <Route Url="/login" Method="POST" Call="servicios.apiUsuarios:loginUsuario" Cors="false" />
+    <Route Url="/registro" Method="POST" Call="servicios.apiUsuarios:registroEntidad" Cors="false" />
+    <Route Url="/registro/entidad" Method="POST" Call="servicios.apiUsuarios:registroEntidad" Cors="false" />
+    <Route Url="/registro/usuario" Method="POST" Call="servicios.apiUsuarios:registroUsuario" Cors="false" />
+    <Route Url="/actualizaConvenio" Method="POST" Call="servicios.apiUsuarios:apruebaRechazaConvenio" Cors="false" />
+    <Route Url="/lstEntAprobacion" Method="GET" Call="servicios.apiUsuarios:lstEntiSinAprobacion" Cors="false" />
+    <Route Url="/lstEntAprobada" Method="GET" Call="servicios.apiUsuarios:lstEntidadAprobada" Cors="false" />
+    <Route Url="/detalleSolicitud/:id" Method="GET" Call="servicios.apiUsuarios:detalleSol" Cors="false" />
+    <Route Url="/usuario/run/:login" Method="GET" Call="servicios.apiUsuarios:run" Cors="false" />
+    <Route Url="/coordinadores/:e" Method="GET" Call="servicios.apiUsuarios:hayCoordinador" Cors="false" />
+    <Route Url="/convenio/datos" Method="POST" Call="servicios.apiUsuarios:datosConvenio" Cors="false" />
+    <Route Url="/usuarios/listado" Method="GET" Call="servicios.apiUsuarios:listaUsuarios" Cors="false" />
+    <Route Url="/usuarios/administradores" Method="GET" Call="servicios.apiUsuarios:listaAdmin" Cors="false" />
+    <Route Url="/usuarios/cambiaEstado" Method="POST" Call="servicios.apiUsuarios:cambiaEstadoUsuario" Cors="false" />
+    <Route Url="/usuarios/firmante" Method="POST" Call="servicios.apiUsuarios:firmante" Cors="false" />
+
+    <Route Url="/listaNombreApis" Method="GET" Call="servicios.apiCatalogos:listaNombreApis" Cors="false" />
+    <Route Url="/servicio/nuevo" Method="POST" Call="servicios.apiCatalogos:nuevoServicio" Cors="false" />
+    <Route Url="/detserv/:id" Method="GET" Call="servicios.apiCatalogos:detalleAPI" Cors="false" />
+    <Route Url="/detserv2/:id" Method="GET" Call="servicios.apiCatalogos:detalleAPI2" Cors="false" />
+    <Route Url="/actualizaServicio" Method="PUT" Call="servicios.apiCatalogos:actualizaServicio" Cors="false" />
+    <Route Url="/catalogo/nuevo" Method="POST" Call="servicios.apiCatalogos:creaCatalogo" Cors="false" />
+    <Route Url="/catalogo/agregaservicios" Method="POST" Call="servicios.apiCatalogos:catservicios" Cors="false" />
+    <Route Url="/catalogo/:id" Method="GET" Call="servicios.apiCatalogos:catalogo" Cors="false" />
+    <Route Url="/catalogo/listaservicioscatalogo/:id" Method="GET" Call="servicios.apiCatalogos:listaServiciosPorCatalogo" Cors="false" />
+    <Route Url="/menu/:p" Method="GET" Call="servicios.apiCatalogos:menuEntidad" Cors="false" />
+    <Route Url="/listaEntidades" Method="GET" Call="servicios.apiCatalogos:listaEntidades" Cors="false" />
+    <Route Url="/listaconveniosporfirmar" Method="GET" Call="servicios.apiCatalogos:listaConveniosPorFirmar" Cors="false" />
+    <Route Url="/comunas" Method="GET" Call="servicios.apiCatalogos:comunas" Cors="false" />
+    <Route Url="/firmardocumento" Method="POST" Call="servicios.apiCatalogos:firma" Cors="false" />
+    <Route Url="/servcatentidad/:e" Method="GET" Call="servicios.apiCatalogos:serviciosCatalogo" Cors="false" />
+    <Route Url="/matriz" Method="GET" Call="servicios.apiCatalogos:matriz" Cors="false" />
+    <Route Url="/servicios/activa/:s" Method="GET" Call="servicios.apiCatalogos:activaServicio" Cors="false" />
+    <Route Url="/servicios/actodos/:s" Method="GET" Call="servicios.apiCatalogos:activaTodos" Cors="false" />
+    <Route Url="/listaqa" Method="GET" Call="servicios.apiCatalogos:listaqa" Cors="false" />
+    <Route Url="/listaqa/nuevo" Method="POST" Call="servicios.apiCatalogos:listaqanuevo" Cors="false" />
+    <Route Url="/listaqa/editar" Method="PUT" Call="servicios.apiCatalogos:listaqaeditar" Cors="false" />
+    <Route Url="/convenios/lista/:entidad" Method="GET" Call="servicios.apiCatalogos:listaConveniosDisponibles" Cors="false" />
+    <Route Url="/convenio/firma1" Method="POST" Call="servicios.apiCatalogos:firmaConvenioFirma1" Cors="false" />
+    <Route Url="/convenio/firma2" Method="POST" Call="servicios.apiCatalogos:firmaConvenioFirma2" Cors="false" />
+    <Route Url="/convenio/valida/:key" Method="GET" Call="servicios.apiCatalogos:ValidaCodigo" Cors="false" />
+    
+    <Route Url="/template/lee/:id" Method="GET" Call="servicios.apiData:templates" Cors="false" />
+    <Route Url="/template/nuevo" Method="POST" Call="servicios.apiData:templatesnuevo" Cors="false" />
+    <Route Url="/template/listado" Method="GET" Call="servicios.apiData:templateLista" Cors="false" />
+    <Route Url="/template/actualiza" Method="POST" Call="servicios.apiData:actualizaTemplate" Cors="false" />
+    <Route Url="/data/cvjpl" Method="POST" Call="servicios.apiData:visorConveniosJPL" Cors="false" />
+</Routes>]]></Data>
+</XData>
+</Class>
+<Class name="servicios.utils">
+
+<Method name="t1">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>e:%Integer</FormalSpec>
+<ReturnType>%String</ReturnType>
+<Implementation><![CDATA[
+		set dato = e
+		&sql(SELECT count(1) INTO :coor from interop_db.Usuarios where usrestado='A' and entidad=:dato and cargo=2)
+		q coor
+]]></Implementation>
+</Method>
+</Class>
+</Export>

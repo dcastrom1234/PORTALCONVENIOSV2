@@ -1,0 +1,41 @@
+<div class="container-fluid">
+    <h4>Tipo de Entidades</h4>
+    <p>Ingrese el nombre de la entidad principal, para poder ser usado en el proceso de registro.</p>
+    <div class="row">
+        <div class="col-xl-6 mx-auto">
+        <form [formGroup]="fgentidad" (ngSubmit)="creaEntidad()">
+            <div class="form-group">
+                <label>Nombre de la Entidad</label>
+                <input type="text" class="form-control" formControlName="tipoentidad">
+            </div>
+        
+        <button type="submit" class="btn btn-primary"> Crear </button>
+        </form>
+    </div>
+</div>
+
+<h4>Listado de tipos de entidad</h4>
+<table class="table table-hover col-10-md">
+    <thead>
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Nombre tipo entidad</th>
+          <th scope="col">Descripción</th>
+          <th scope="col">Estado</th>
+          <th scope="col">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let l of listado; let i = index">
+         
+          <td>{{l.id}}</td>
+          <td>{{l.nombre}}</td>
+          <td>{{l.desc}}</td>
+          <td>{{l.estado}}</td>
+          <td>
+              <a class="btn btn-warning btn-sm" routerLink="/detaserv/{{l.id}}">Ver</a> &nbsp;
+              <a class="btn btn-success btn-sm" routerLink="/editaserv//{{l.id}}">Editar</a>
+          </td>
+        </tr>
+    </tbody>
+</table>

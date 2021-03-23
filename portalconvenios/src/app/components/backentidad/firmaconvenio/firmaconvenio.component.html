@@ -1,0 +1,30 @@
+<div class="container-fluid">
+    <h3>Firma de convenio</h3>
+    <p>Seleccione el convenio a firmar usando clave única.</p>
+
+
+    <div *ngIf="!confirmadoCU"> 
+        <p> Presione el botón de inicio de sesión y siga las intrucciones para firma el documento usando Clave Única.</p><br>
+        <a class="btn-cu" (click)="login()">
+            <span class="cl-claveunica"></span>
+            <span class="texto">Iniciar sesión</span>
+        </a>
+    </div>
+    <p *ngIf="listaConvenios.length==0">No hay convenios para firmar</p>
+    <form  [formGroup]="firma" novalidate (ngSubmit)="firmaDocumento()" *ngIf="listaConvenios.length>0">
+        
+        <div>
+        <div>
+            <div>
+                <p>Seleccione el documento a firmar.</p>
+            </div>
+            <div class="alert" *ngFor="let l of listaConvenios; let i=index">
+                <input type="radio" value="{{l.codigo}}" formControlName="documento"> {{l.nombre}}: {{l.descripcion}}   
+            </div>
+        </div>
+        </div>
+        
+        <button type="submit" class="btn btn-primary" >Firmar Convenio</button>
+    </form>
+
+</div>

@@ -1,0 +1,66 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <a class="navbar-brand" href="#">Portal de Convenios</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarColor01">
+    <ul class="navbar-nav mr-auto">
+      <ng-container *ngIf="auth.esAdmin()">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/homeadmin"> Home </a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Servicios
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" routerLink="/listaservicios">Listado servicios</a>
+              <a class="dropdown-item" routerLink="/servicios">Nuevo Servicio</a>
+              <a class="dropdown-item" routerLink="/matriz">Matriz de Servicio</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Usuarios
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" routerLink="/listausuarios">Listado Usuarios</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Plantillas
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" routerLink="/plantilla">Nueva Plantilla</a>
+              <a class="dropdown-item" routerLink="/listaplantillas">Listado de Plantillas (editar)</a>
+            </div>
+          </li>
+      </ng-container>
+      <ng-container *ngIf="auth.esApoderado()">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/homeentidad"> Home </a>
+          </li>
+      </ng-container>
+      <ng-template #loggedIn>
+        <li class="nav-item">
+          <a class="nav-link" style="cursor: pointer;" (click)="auth.logout()"><b>{{ auth.userLogged().toUpperCase() }}</b> | Salir</a>
+        </li>
+      </ng-template>
+    </ul>
+    <ul class="navbar-nav ml-auto">
+    <ng-container *ngIf="!auth.loggedIn(); else loggedIn">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/login">Ingresar</a>
+        </li>
+        <li class="nav-item">
+          <a [routerLink]="['/registro']"  class="nav-link">Registro</a>
+        </li>
+    </ng-container>
+  </ul>
+  </div>
+</nav>
+<div class="container-fluid p-3">
+  <router-outlet></router-outlet>
+</div>

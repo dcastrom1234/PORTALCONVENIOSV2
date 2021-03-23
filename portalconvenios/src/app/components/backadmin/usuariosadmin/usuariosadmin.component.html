@@ -1,0 +1,40 @@
+<div class="container-fluid p-2">
+    <h3>Creación de usuarios administradores</h3>
+    <p>Ingrese los datos a continuación para crear un usuario Administrador del Portal</p>
+    <form [formGroup]="regusuarios" (ngSubmit)="registroUsuarios()" >
+        <div class="form-group">
+            <label for="usrnombre">Nombre administrador</label>
+            <input type="text" class="form-control" formControlName="usrnombre" placeholder="ej. Juan Perez">
+        </div>
+        <div class="form-group">
+            <label for="usrrun">RUN administrador</label>
+            <input type="text" class="form-control" formControlName="usrrun" placeholder="ej. 12345678-9">
+        </div>
+        <div class="form-group">
+            <label for="usremail">Email administrador</label>
+            <input type="text" class="form-control" formControlName="usremail" placeholder="ej. yo@@registrocivil.cl">
+        </div>
+        <div class="form-group">
+            <label for="usrtelefono">Teléfono contacto administrador</label>
+            <input type="text" class="form-control form-control-sm" formControlName="usrtelefono" placeholder="+56988778855">
+        </div>
+        <div class="form-group">
+            <label>Genero </label><br>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" formControlName="usrgenero" value="M">
+                <label class="form-check-label">Masculino</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" formControlName="usrgenero" value="F">
+                <label class="form-check-label">Femenino</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="usrclave">Clave (mín 6 caracteres)</label>
+            <input type="text" class="form-control" formControlName="usrclave" >
+        </div>
+        <input type="hidden" formControlName="entidad" value="1">
+        <input type="hidden" formControlName="cargo">
+        <button type="submit" [disabled]="regusuarios.invalid" class="btn btn-primary">Registrar Usuario</button>
+    </form>
+</div>

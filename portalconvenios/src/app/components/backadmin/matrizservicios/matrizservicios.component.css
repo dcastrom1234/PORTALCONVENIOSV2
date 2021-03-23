@@ -1,0 +1,26 @@
+.vheader {
+    text-align:center;
+    white-space:nowrap;
+    g-origin: 50% 50%;
+    -webkit-transform: rotate(270deg);
+    -moz-transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+    -o-transform: rotate(270deg);
+    transform: rotate(270deg);
+    
+}
+.vheader p {
+    margin:0 -100% ;
+    display:inline-block;
+}
+.vheader p:before{
+    content:'';
+    width:0;
+    padding-top:110%;/* takes width as reference, + 10% for faking some extra padding */
+    display:inline-block;
+    vertical-align:middle;
+}
+
+table.matriz th {
+    border-bottom: 1px solid black;
+}

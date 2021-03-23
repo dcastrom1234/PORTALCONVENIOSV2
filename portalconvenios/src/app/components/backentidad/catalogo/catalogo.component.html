@@ -1,0 +1,16 @@
+<div class="container-fluid">
+    <h3>Catalogo de Servicios</h3>
+    <p>Estos son los servicios autorizados para ser usado por la Entidad solicitante.</p>
+  <div class="row mx-auto">
+    <div class="card border-primary col-3 mx-auto"  *ngFor="let i of listaServicios">
+        <div class="card-body">
+          <h5 class="card-title"><b> {{ i.name }} </b></h5>
+          <h6 class="card-subtitle mb-2 text-muted">API Rest JSON</h6>
+          <p class="card-text">{{ i.des }}</p>
+          <a routerLink="/detservicios/{{i.id}}" class="btn btn-primary">Ver detalles</a>
+        </div>
+    </div>
+  </div>
+
+
+</div>
